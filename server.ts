@@ -30,7 +30,7 @@ app.listen(
 );
 
 //Mount routers
-app.use("/e-auction/api/v1/sellers", Router); 
+app.use("/e-auction/api/v1/seller", Router); 
 
 //export
 module.exports = app;
