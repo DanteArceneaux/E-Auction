@@ -4,7 +4,8 @@
 exports.getSellers =  (req, res) => {
     res.status(200).json({
         success: true,
-        message: "Show all sellers"
+        message: "Show all sellers", 
+        
     });
 }
 

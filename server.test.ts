@@ -7,7 +7,7 @@ const request = require("supertest"); // Import supertest
 describe("GET /e-auction/api/v1/seller", () => {
     it("should return 200 OK", () => {
         return request(testApp)
-        .get("/e-auction/api/v1/seller")
+        .get("/e-auction/api/v1/sellers")
         .expect(200);
     });
     });
