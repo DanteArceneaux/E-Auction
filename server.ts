@@ -1,6 +1,6 @@
 const express = require("express"); // Import express
 const dotenv = require("dotenv"); // Load environment variables from .env file
-const Router = require("./routes/seller-route"); // Import the seller route
+const Router = require("./routes/route"); // Import the seller route
 const morgan = require("morgan"); // Import morgan
 
 // Load environment variables from .env file
@@ -30,7 +30,7 @@ app.listen(
 );
 
 //Mount routers
-app.use("/e-auction/api/v1/seller", Router); 
+app.use("/e-auction/api/v1/", Router); 
 
 //export
 module.exports = app;
