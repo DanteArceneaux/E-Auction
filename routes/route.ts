@@ -26,4 +26,4 @@ router.route("/buyer/place-bid").post(placeBid); // This is the same as app.post
 router.route("/buyer/update-bid").put(updateBid); // This is the same as app.post("/api/buyers/update-bid", (req, res) => { ... })
 
 module.exports = router; // Export the seller router
-
+ 
