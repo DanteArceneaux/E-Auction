@@ -40,7 +40,10 @@ const ProductSchema = new mongoose.Schema({
   },
   bidEndDate: {
     type: Date,
-    required: [true, "Please add a bid end date"],
+    validate: function(input) {
+      return input > Date.now();
+    },
+    required: [true, "Please add a bid end date [must be in the future]"],
     trim: true
   }
 });
