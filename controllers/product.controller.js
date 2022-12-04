@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Category = require("../models/Category.enum.ts");
+const Product = require("../models/Product.model.js");
 
 const ProductSchema = new mongoose.Schema({
   productName: {
@@ -47,15 +47,6 @@ const ProductSchema = new mongoose.Schema({
     trim: true
   }
 });
-
-//@desc    Get all sellers
-//@route   GET /api/v1/sellers
-exports.getSellers = (req, res) => {
-  res.status(200).json({
-    success: true,
-    message: "Show all sellers"
-  });
-};
 
 //@desc    Add a new product
 //@route   POST /api/v1/sellers/add-product

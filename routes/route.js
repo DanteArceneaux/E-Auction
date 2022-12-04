@@ -2,7 +2,6 @@ const Routes = require("express"); // Import express
 const router = Routes.Router(); // Create a router
 
 const {
-  getSellers,
   addProduct,
   deleteProductById
 } = require("../controllers/product.controller"); // Import the seller controller
@@ -12,8 +11,6 @@ const {
   placeBid,
   updateBid
 } = require("../controllers/buyer.controller"); // Import the buyer controller
-
-router.route("/seller").get(getSellers); // This is the same as app.get("/api/sellers", (req, res) => { ... })
 
 router.route("/seller/add-product").post(addProduct); // This is the same as app.post("/api/sellers/add-product", (req, res) => { ... })
 
