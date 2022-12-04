@@ -1,11 +1,11 @@
-const Routes  = require("express"); // Import express
-const router =  Routes.Router(); // Create a router
+const Routes = require("express"); // Import express
+const router = Routes.Router(); // Create a router
 
 const {
   getSellers,
   addProduct,
   deleteProductById
-} = require("../controllers/seller.controller"); // Import the seller controller
+} = require("../controllers/product.controller"); // Import the seller controller
 
 const {
   getBuyers,
@@ -26,4 +26,3 @@ router.route("/buyer/place-bid").post(placeBid); // This is the same as app.post
 router.route("/buyer/update-bid").put(updateBid); // This is the same as app.post("/api/buyers/update-bid", (req, res) => { ... })
 
 module.exports = router; // Export the seller router
- 

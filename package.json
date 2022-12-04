@@ -14,10 +14,10 @@
   "test": "jest",
   
     
-  "start": "SET NODE_ENV=production && node server.ts",
+  "start": "SET NODE_ENV=production && node server.js",
   
     
-  "dev": "nodemon server.ts"
+  "dev": "nodemon server.js"
   
   },
   
@@ -29,6 +29,9 @@
   
     
   "body-parser": "^1.20.1",
+  
+    
+  "colors": "^1.4.0",
   
     
   "dotenv": "^16.0.3",

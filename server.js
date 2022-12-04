@@ -1,9 +1,8 @@
-import { string } from "prop-types";
-
 const express = require("express"); // Import express
 const dotenv = require("dotenv"); // Load environment variables from .env file
 const morgan = require("morgan"); // Import morgan
 const connectDB = require("./config/db"); // Import the database connection
+const colors = require("colors"); // Import morgan
 
 // Load environment variables from .env file
 dotenv.config({
@@ -33,9 +32,12 @@ const PORT = process.env.PORT || 5000; // 5000 is the default port
 
 const server = app.listen(
   PORT,
-  console.log(`Server running in ${process.env.NODE_ENV} mode on port ${PORT}`)
-);
 
+  console.log(
+    `\n Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+      .brightBlue.bold
+  )
+);
 
 //export
 module.exports = app;
