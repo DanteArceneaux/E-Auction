@@ -1,6 +1,8 @@
 const Buyer = require("../models/buyer.model.js");
 const Product = require("../models/Product.model.js");
 
+const ErrorResponse = require("../utils/errorResponse.js");
+
 //@dec    Get all products
 //@route   GET /api/v1/buyers/products
 exports.getBuyers = async (req, res) => {
@@ -53,7 +55,7 @@ exports.getBuyerById = async (req, res, next) => {
       data: buyers
     });
   } catch (err) {
-    next(err);
+    next(new ErrorResponse(`Buyer not found with id of ${req.params.id}`, 404));
     res.status(400).json({
       success: false,
       error: err.message
