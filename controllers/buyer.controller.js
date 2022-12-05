@@ -39,9 +39,9 @@ exports.addBuyer = async (req, res) => {
 
 //@desc   Get product by id
 //@route  GET /api/v1/buyers/product/{productId}
-exports.getBuyerById = async (req, res) => {
+exports.getBuyerById = async (req, res, next) => {
   try {
-    const Buyer = await Buyer.findById(req.params.id);
+    const buyers = await Buyer.findById(req.params.id);
     if (!buyers) {
       return res.status(404).json({
         success: false,
@@ -53,6 +53,7 @@ exports.getBuyerById = async (req, res) => {
       data: buyers
     });
   } catch (err) {
+    next(err);
     res.status(400).json({
       success: false,
       error: err.message

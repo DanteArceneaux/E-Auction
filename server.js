@@ -3,6 +3,7 @@ const dotenv = require("dotenv"); // Load environment variables from .env file
 const morgan = require("morgan"); // Import morgan
 const connectDB = require("./config/db"); // Import the database connection
 const colors = require("colors"); // Import morgan
+const errorHandler = require("./middleware/error"); // Import the error handler
 
 // Load environment variables from .env file
 dotenv.config({
@@ -27,6 +28,9 @@ app.use(express.json());
 
 //Mount routers
 app.use("/e-auction/api/v1/", Router);
+
+// Error Handler Middleware
+app.use(errorHandler);
 
 const PORT = process.env.PORT || 5000; // 5000 is the default port
 
