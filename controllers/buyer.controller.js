@@ -34,7 +34,7 @@ exports.addBuyer = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       success: false,
-      error: err.message + "/n ***** Please input an actual product id *****"
+      error: err.message
     });
 
     console.log(err.message.red.bold);

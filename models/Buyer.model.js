@@ -47,8 +47,14 @@ const buyerSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please add a pin"],
     notNull: true,
-    min_length: [4, "Pin must be at least 100000"],
-    max_length: [12, "Pin can not be more than 999999"],
+    maxLength: [6, "Pin can not be more than 6 characters"],
+    validate: {
+      validator: function(v) {
+        return v.toString().length <= 6;
+      },
+      message: props =>
+        `${props.value} is not a valid pin! must be fewer or equal to 6 characters`
+    },
     trim: true
   },
   phone: {
@@ -81,13 +87,14 @@ const buyerSchema = new mongoose.Schema({
     validate: {
       //productId must exist with message "Product id does not exist"
       validator: async function(v) {
-        const product = await Product.findById(v);
-        await product;
+        const product = await Product.findById(v).catch(err => {
+          throw new ErrorResponse("Product id does not exist", 404);
+        });
         if (!product) {
           throw new ErrorResponse("Product id does not exist", 404);
         }
       },
-      message: props => props.value + " is not a valid product id"
+      message: props => `${props.value} is not a valid product id`
     }
   },
 
