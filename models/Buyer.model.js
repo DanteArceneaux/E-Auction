@@ -45,16 +45,16 @@ const buyerSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please add a pin"],
     notNull: true,
-    min: [4, "Pin must be at least 100000"],
-    max: [12, "Pin can not be more than 999999"],
+    min_length: [4, "Pin must be at least 100000"],
+    max_length: [12, "Pin can not be more than 999999"],
     trim: true
   },
   phone: {
     type: Number,
     required: [true, "Please add a phone number"],
     notNull: true,
-    min: [10, "Phone number must be at least 10 digits"],
-    max: [10, "Phone number can not be more than 10 digits"],
+    min_length: [10, "Phone number must be at least 10 digits"],
+    max_length: [10, "Phone number can not be more than 10 digits"],
     trim: true
   },
   email: {

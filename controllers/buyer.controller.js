@@ -20,10 +20,10 @@ exports.getBuyers = async (req, res) => {
 //@route   POST /api/v1/buyers/add-product
 exports.addBuyer = async (req, res) => {
   try {
-    await Buyer.create(req.body).then(buyer => {
+    await Buyer.create(req.body).then(buyers => {
       res.status(201).json({
         success: true,
-        data: buyer
+        data: buyers
       });
     });
   } catch (err) {
@@ -41,7 +41,7 @@ exports.addBuyer = async (req, res) => {
 exports.getBuyerById = async (req, res) => {
   try {
     const Buyer = await Buyer.findById(req.params.id);
-    if (!buyer) {
+    if (!buyers) {
       return res.status(404).json({
         success: false,
         error: "No product found"
@@ -49,7 +49,7 @@ exports.getBuyerById = async (req, res) => {
     }
     res.status(200).json({
       success: true,
-      data: buyer
+      data: buyers
     });
   } catch (err) {
     res.status(400).json({
@@ -96,7 +96,7 @@ exports.updateBuyerById = async (req, res) => {
   try {
     const Buyer = await Buyer.findByIdAndUpdate(req.params.id, req.body);
 
-    if (!buyer) {
+    if (!buyers) {
       return res.status(404).json({
         success: false,
         error: "No product found"
@@ -105,7 +105,7 @@ exports.updateBuyerById = async (req, res) => {
 
     res.status(200).json({
       success: true,
-      data: buyer
+      data: buyers
     });
   } catch (err) {
     res.status(400).json({
