@@ -1,4 +1,5 @@
 const Buyer = require("../models/buyer.model.js");
+const Product = require("../models/Product.model.js");
 
 //@dec    Get all products
 //@route   GET /api/v1/buyers/products
@@ -16,14 +17,14 @@ exports.getBuyers = async (req, res) => {
   }
 };
 
-//@desc    Add a new product
-//@route   POST /api/v1/buyers/add-product
+//@desc    Add a new buyer
+//@route   POST /api/v1/buyers/add-buyer
 exports.addBuyer = async (req, res) => {
   try {
-    await Buyer.create(req.body).then(buyers => {
+    await Buyer.create(req.body).then(buyer => {
       res.status(201).json({
         success: true,
-        data: buyers
+        data: buyer
       });
     });
   } catch (err) {
@@ -65,7 +66,7 @@ exports.getBuyerById = async (req, res) => {
 //@route   GET /api/v1/buyers/delete/{productId}
 exports.deleteBuyerById = async (req, res) => {
   try {
-    const Buyer = await Buyer.findById(req.params.id);
+    const buyer = await Buyer.findById(req.params.id);
 
     if (!buyer) {
       return res.status(404).json({
@@ -94,7 +95,7 @@ exports.deleteBuyerById = async (req, res) => {
 //@route   PUT /api/v1/buyers/update/{productId}
 exports.updateBuyerById = async (req, res) => {
   try {
-    const Buyer = await Buyer.findByIdAndUpdate(req.params.id, req.body);
+    const buyers = await Buyer.findByIdAndUpdate(req.params.id, req.body);
 
     if (!buyers) {
       return res.status(404).json({
