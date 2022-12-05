@@ -2,17 +2,21 @@ const Routes = require("express"); // Import express
 const router = Routes.Router(); // Create a router
 
 const {
-  getSellers,
-  addSeller,
-  getSellerById,
-  updateSeller,
-  deleteSeller,
   updateProductById,
   getProductById,
   getProducts,
   addProduct,
   deleteProductById
-} = require("../controllers/product.controller"); // Import the seller controller
+} = require("../controllers/product.controller"); // Import the Product controller
+
+//Import the Sellers controller
+const {
+  getSellers,
+  addSeller,
+  getSellerById,
+  updateSeller,
+  deleteSeller
+} = require("../controllers/seller.controller");
 
 const {
   getBuyers,
@@ -39,14 +43,5 @@ router.route("/sellers").get(getSellers);
 
 //add a new seller
 router.route("/sellers/add-seller").post(addSeller);
-
-//get seller by ID
-router.route("/sellers/:id").get(getSellerById);
-
-//update seller by id
-router.route("/sellers/update/:id").put(updateSeller);
-
-//delete a seller by id
-router.route("/sellers/delete/:id").delete(deleteSeller);
 
 module.exports = router; // Export the seller router

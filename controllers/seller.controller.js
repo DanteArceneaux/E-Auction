@@ -1,8 +1,7 @@
-const Product = require("../models/Product.model.js");
+const Seller = require("../models/Seller.model.js");
 
-//@dec    Get all sellers
-//@route   GET /api/v1/sellers
-
+//@dec    Get all products
+//@route   GET /api/v1/sellers/products
 exports.getSellers = async (req, res) => {
   try {
     const sellers = await Seller.find();
@@ -17,8 +16,8 @@ exports.getSellers = async (req, res) => {
   }
 };
 
-//@desc    Add a new seller
-//@route   POST /api/v1/sellers/add-seller
+//@desc    Add a new product
+//@route   POST /api/v1/sellers/add-product
 exports.addSeller = async (req, res) => {
   try {
     await Seller.create(req.body).then(seller => {
@@ -37,15 +36,15 @@ exports.addSeller = async (req, res) => {
   }
 };
 
-//@desc   Get seller by id
-//@route  GET /api/v1/sellers/seller/{sellerId}
+//@desc   Get product by id
+//@route  GET /api/v1/sellers/product/{productId}
 exports.getSellerById = async (req, res) => {
   try {
     const seller = await Seller.findById(req.params.id);
     if (!seller) {
       return res.status(404).json({
         success: false,
-        error: "No seller found"
+        error: "No product found"
       });
     }
     res.status(200).json({
@@ -62,45 +61,21 @@ exports.getSellerById = async (req, res) => {
   }
 };
 
-//@desc   Update seller by id
-//@route  PUT /api/v1/sellers/seller/{sellerId}
-exports.updateSellerById = async (req, res) => {
-  try {
-    const seller = await Seller.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
-    if (!seller) {
-      return res.status(404).json({
-        success: false,
-        error: "No seller found"
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: seller
-    });
-  } catch (err) {
-    res.status(400).json({
-      success: false,
-      error: err.message
-    });
-
-    console.log(err.message.red.bold);
-  }
-};
-
-//@desc   Delete seller by id
-//@route  DELETE /api/v1/sellers/seller/{sellerId}
+//@desc    Delete a product by id
+//@route   GET /api/v1/sellers/delete/{productId}
 exports.deleteSellerById = async (req, res) => {
   try {
-    const seller = await Seller.findByIdAndDelete(req.params.id);
+    const seller = await Seller.findById(req.params.id);
+
     if (!seller) {
       return res.status(404).json({
         success: false,
-        error: "No seller found"
+        error: "No product found"
       });
     }
+
+    await seller.remove();
+
     res.status(200).json({
       success: true,
       data: {}
@@ -115,45 +90,19 @@ exports.deleteSellerById = async (req, res) => {
   }
 };
 
-//@desc   Get seller by id
-//@route  GET /api/v1/sellers/seller/{sellerId}
-exports.getSellerById = async (req, res) => {
-  try {
-    const seller = await Seller.findById(req.params.id);
-    if (!seller) {
-      return res.status(404).json({
-        success: false,
-        error: "No seller found"
-      });
-    }
-    res.status(200).json({
-      success: true,
-      data: seller
-    });
-  } catch (err) {
-    res.status(400).json({
-      success: false,
-      error: err.message
-    });
-
-    console.log(err.message.red.bold);
-  }
-};
-
-//@desc   Update seller by id
-//@route  PUT /api/v1/sellers/seller/{sellerId}
+//@desc    Update a product by id
+//@route   PUT /api/v1/sellers/update/{productId}
 exports.updateSellerById = async (req, res) => {
   try {
-    const seller = await Seller.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+    const seller = await Seller.findByIdAndUpdate(req.params.id, req.body);
+
     if (!seller) {
       return res.status(404).json({
         success: false,
-        error: "No seller found"
+        error: "No product found"
       });
     }
+
     res.status(200).json({
       success: true,
       data: seller
