@@ -14,15 +14,17 @@ const {
   getSellers,
   addSeller,
   getSellerById,
-  updateSeller,
-  deleteSeller
+  updateSellerById,
+  deleteSellerById
 } = require("../controllers/seller.controller");
 
 const {
   getBuyers,
-  placeBid,
-  updateBid
-} = require("../controllers/buyer.controller"); // Import the buyer controller
+  addBuyer,
+  getBuyerById,
+  updateBuyerById,
+  deleteBuyerById
+} = require("../controllers/buyer.controller");
 
 //get all products
 router.route("/products").get(getProducts);
@@ -43,5 +45,29 @@ router.route("/sellers").get(getSellers);
 
 //add a new seller
 router.route("/sellers/add-seller").post(addSeller);
+
+//get seller by ID
+router.route("/sellers/:id").get(getSellerById);
+
+//update seller by id
+router.route("/sellers/update/:id").put(updateSellerById);
+
+//delete a seller by id
+router.route("/sellers/delete/:id").delete(deleteSellerById);
+
+//get all buyers
+router.route("/buyers").get(getBuyers);
+
+//add a new buyer
+router.route("/buyers/add-buyer").post(addBuyer);
+
+//get buyer by ID
+router.route("/buyers/:id").get(getBuyerById);
+
+//update buyer by id
+router.route("/buyers/update/:id").put(updateBuyerById);
+
+//delete a buyer by id
+router.route("/buyers/delete/:id").delete(deleteBuyerById);
 
 module.exports = router; // Export the seller router
