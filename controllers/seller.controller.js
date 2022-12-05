@@ -94,7 +94,10 @@ exports.deleteSellerById = async (req, res) => {
 //@route   PUT /api/v1/sellers/update/{productId}
 exports.updateSellerById = async (req, res) => {
   try {
-    const seller = await Seller.findByIdAndUpdate(req.params.id, req.body);
+    const seller = await Seller.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+      runValidators: true
+    });
 
     if (!seller) {
       return res.status(404).json({
