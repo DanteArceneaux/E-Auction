@@ -21,6 +21,8 @@ exports.getBuyers = async (req, res) => {
 
 //@desc    Add a new buyer
 //@route   POST /api/v1/buyers/add-buyer
+
+//add buyer if productId exists when creating buyer
 exports.addBuyer = async (req, res) => {
   try {
     await Buyer.create(req.body).then(buyer => {
@@ -32,7 +34,7 @@ exports.addBuyer = async (req, res) => {
   } catch (err) {
     res.status(400).json({
       success: false,
-      error: err.message
+      error: err.message + "/n ***** Please input an actual product id *****"
     });
 
     console.log(err.message.red.bold);
@@ -45,11 +47,11 @@ exports.getBuyerById = async (req, res, next) => {
   try {
     const buyers = await Buyer.findById(req.params.id);
     if (!buyers) {
-      return res.status(404).json({
-        success: false,
-        error: "No product found"
-      });
+      return next(
+        new ErrorResponse(`Buyer not found with id of ${req.params.id}`, 404)
+      );
     }
+
     res.status(200).json({
       success: true,
       data: buyers

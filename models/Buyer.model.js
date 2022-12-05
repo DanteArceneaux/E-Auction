@@ -1,4 +1,6 @@
 const mongoose = require("mongoose");
+const Product = require("./Product.model");
+const ErrorResponse = require("../utils/errorResponse.js");
 
 const buyerSchema = new mongoose.Schema({
   firstName: {
@@ -75,7 +77,18 @@ const buyerSchema = new mongoose.Schema({
     notNull: true,
     min_length: [5, "Product id must be at least 5 characters"],
     max_length: [30, "Product id can not be more than 30 characters"],
-    trim: true
+    trim: true,
+    validate: {
+      //productId must exist with message "Product id does not exist"
+      validator: async function(v) {
+        const product = await Product.findById(v);
+        await product;
+        if (!product) {
+          throw new ErrorResponse("Product id does not exist", 404);
+        }
+      },
+      message: props => props.value + " is not a valid product id"
+    }
   },
 
   bidAmount: {
