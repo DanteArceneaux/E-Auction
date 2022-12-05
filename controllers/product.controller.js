@@ -89,3 +89,30 @@ exports.deleteProductById = async (req, res) => {
     console.log(err.message.red.bold);
   }
 };
+
+//@desc    Update a product by id
+//@route   PUT /api/v1/sellers/update/{productId}
+exports.updateProductById = async (req, res) => {
+  try {
+    const product = await Product.findByIdAndUpdate(req.params.id, req.body);
+
+    if (!product) {
+      return res.status(404).json({
+        success: false,
+        error: "No product found"
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      data: product
+    });
+  } catch (err) {
+    res.status(400).json({
+      success: false,
+      error: err.message
+    });
+
+    console.log(err.message.red.bold);
+  }
+};
