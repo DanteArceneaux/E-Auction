@@ -1,20 +1,63 @@
 const Product = require("../models/Product.model.js");
+const asyncHandler = require("../middleware/async.js");
 
 //@dec    Get all products
 //@route   GET /api/v1/sellers/products
-exports.getProducts = async (req, res) => {
-  try {
-    const products = await Product.find();
-    res.status(200).json({
-      success: true,
-      count: products.length,
-      data: products
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server Error" });
-  }
-};
+exports.getProducts = asyncHandler(async (req, res) => {
+  const products = await Product.find();
+  res.status(200).json({
+    success: true,
+    count: products.length,
+    data: products
+  });
+});
+
+//@desc    Get all products by category
+//@route   GET /api/v1/sellers/products/category/{category}
+exports.getProductsByCategory = asyncHandler(async (req, res) => {
+  const products = await Product.find({ category: req.params.category });
+  res.status(200).json({
+    success: true,
+    count: products.length,
+    data: products
+  });
+});
+
+//@desc    Get all products by seller
+//@route   GET /api/v1/sellers/products/seller/{sellerId}
+exports.getProductsBySeller = asyncHandler(async (req, res) => {
+  const products = await Product.find({ seller: req.params.sellerId });
+  res.status(200).json({
+    success: true,
+    count: products.length,
+    data: products
+  });
+});
+
+//@desc    Get all products by seller and category
+//@route   GET /api/v1/sellers/products/seller/{sellerId}/category/{category}
+exports.getProductsBySellerAndCategory = asyncHandler(async (req, res) => {
+  const products = await Product.find({
+    seller: req.params.sellerId,
+    category: req.params.category
+  });
+  res.status(200).json({
+    success: true,
+    count: products.length,
+    data: products
+  });
+});
+
+//@desc    Get product by bidEndDate
+//@route   GET /api/v1/sellers/product/bidEndDate/{bidEndDate}
+exports.getProductByBidEndDate = asyncHandler(async (req, res) => {
+  const products = await Product.find({ bidEndDate: req.params.bidEndDate });
+  res.status(200).json({
+    success: true,
+    count: products.length,
+    data: products
+  });
+});
 
 //@desc    Add a new product
 //@route   POST /api/v1/sellers/add-product

@@ -1,23 +1,19 @@
 const Buyer = require("../models/buyer.model.js");
 const Product = require("../models/Product.model.js");
+const asyncHandler = require("../middleware/async.js");
 
 const ErrorResponse = require("../utils/errorResponse.js");
 
 //@dec    Get all products
 //@route   GET /api/v1/buyers/products
-exports.getBuyers = async (req, res) => {
-  try {
-    const buyers = await Buyer.find();
-    res.status(200).json({
-      success: true,
-      count: buyers.length,
-      data: buyers
-    });
-  } catch (err) {
-    console.error(err);
-    res.status(500).json({ error: "Server Error" });
-  }
-};
+exports.getBuyers = asyncHandler(async (req, res) => {
+  const buyers = await Buyer.find();
+  res.status(200).json({
+    success: true,
+    count: buyers.length,
+    data: buyers
+  });
+});
 
 //@desc    Add a new buyer
 //@route   POST /api/v1/buyers/add-buyer
