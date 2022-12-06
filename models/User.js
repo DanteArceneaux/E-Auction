@@ -14,24 +14,18 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please add a first name"],
     notNull: true,
-    min_length: [5, "First name must be at least 2 characters"],
-    max_length: [30, "First name can not be more than 30 characters"],
     trim: true
   },
   lastName: {
     type: String,
     required: [true, "Please add a last name"],
     notNull: true,
-    min_length: [3, "Last name must be at least 2 characters"],
-    max_length: [15, "Last name can not be more than 30 characters"],
     trim: true
   },
   email: {
     type: String,
     required: [true, "Please add an email"],
     notNull: true,
-    min_length: [5, "Email must be at least 5 characters"],
-    max_length: [100, "Email can not be more than 100 characters"],
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please add a valid email"
@@ -42,8 +36,6 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please add a pin"],
     notNull: true,
-    minlength: [4, "Pin must be at least 100000 (must be a number)"],
-    maxlength: [12, "Pin can not be more than 999999 (must be a number)"],
     select: false, // Don't show pin in response
     trim: true
   },

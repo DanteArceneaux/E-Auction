@@ -4,6 +4,7 @@ const morgan = require("morgan"); // Import morgan
 const connectDB = require("./config/db"); // Import the database connection
 const colors = require("colors"); // Import morgan
 const errorHandler = require("./middleware/error"); // Import the error handler
+const auth = require("./routes/auth"); // Import the auth routes
 
 // Load environment variables from .env file
 dotenv.config({
@@ -27,7 +28,9 @@ if (process.env.NODE_ENV === "development") {
 app.use(express.json());
 
 //Mount routers
+
 app.use("/e-auction/api/v1/", Router);
+app.use("/e-auction/api/v1/auth", auth);
 
 // Error Handler Middleware
 app.use(errorHandler);
