@@ -1,9 +1,14 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
+//bcrypt
+const bcrypt = require("bcryptjs");
+//jwt
+const jwt = require("jsonwebtoken");
 
 const UserSchema = new mongoose.Schema({
   role: {
     type: String,
+    required: [true, "Please add a role"],
     enum: ["admin", "seller", "buyer"],
     default: "buyer",
     required: [true, "Please add a role: admin, seller or buyer"],
@@ -60,5 +65,19 @@ const UserSchema = new mongoose.Schema({
     default: Date.now
   }
 });
+
+//Encrypt pin using bcrypt
+UserSchema.pre("save", async function(next) {
+  const salt = await bcrypt.genSalt(10);
+  //change pin to string.  bcrypt only accepts strings
+  this.pin = await bcrypt.hash(this.pin.toString(), salt);
+});
+
+//Sign JWT and return
+UserSchema.methods.getSignedJwtToken = function() {
+  return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
+    expiresIn: process.env.JWT_EXPIRE
+  });
+};
 
 module.exports = mongoose.model("User", UserSchema);

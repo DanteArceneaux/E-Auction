@@ -5,7 +5,7 @@ const User = require("../models/User.js");
 // @route   POST /api/v1/auth/register
 
 exports.register = asyncHandler(async (req, res, next) => {
-  const { firstName, lastName, email, pin, phone } = req.body;
+  const { firstName, lastName, email, pin, phone, role } = req.body;
 
   // Create user
   const user = await User.create({
@@ -13,7 +13,8 @@ exports.register = asyncHandler(async (req, res, next) => {
     lastName,
     email,
     pin,
-    phone
+    phone,
+    role
   });
 
   res.status(200).json({ success: true, data: user });
