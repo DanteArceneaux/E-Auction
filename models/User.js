@@ -42,8 +42,18 @@ const UserSchema = new mongoose.Schema({
     required: [true, "Please add a pin"],
     notNull: true,
     select: false, // Don't show pin in response
-    trim: true
+    maxlength: [6, "Pin can not be more than 4 characters"],
+    trim: true,
+
+    validate: {
+      validator: function(v) {
+        return v.toString().length <= 6;
+      },
+      message: props =>
+        `${props.value} is not a valid pin! must be fewer or equal to 6 characters`
+    }
   },
+
   phone: {
     type: Number,
     required: [true, "Please add a phone number (must be a number)"],
@@ -78,6 +88,15 @@ UserSchema.methods.getSignedJwtToken = function() {
   return jwt.sign({ id: this._id }, process.env.JWT_SECRET, {
     expiresIn: process.env.JWT_EXPIRE
   });
+};
+
+// match user entered pin to pin in database
+UserSchema.methods.matchPin = async function(enteredPin) {
+  if (enteredPin === this.pin) {
+    return true;
+  } else {
+    return false;
+  }
 };
 
 module.exports = mongoose.model("User", UserSchema);
