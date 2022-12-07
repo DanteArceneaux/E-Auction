@@ -2,6 +2,8 @@ const mongoose = require("mongoose");
 const slugify = require("slugify");
 
 const ProductSchema = new mongoose.Schema({
+  //seller
+
   productName: {
     type: String,
     unique: true,
@@ -46,12 +48,6 @@ const ProductSchema = new mongoose.Schema({
     },
     required: [true, "Please add a bid end date [must be in the future]"],
     trim: true
-  },
-  //seller
-  user: {
-    type: mongoose.Schema.ObjectId,
-    ref: "User",
-    required: true
   }
 });
 

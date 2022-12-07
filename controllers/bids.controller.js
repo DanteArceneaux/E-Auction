@@ -1,4 +1,4 @@
-const Buyer = require("../models/buyer.model.js");
+const User = require("../models/User.model.js");
 
 const Product = require("../models/Product.model.js");
 const Bids = require("../models/Bids.model.js");
@@ -21,14 +21,14 @@ exports.getBids = asyncHandler(async (req, res) => {
 //@route   POST /api/v1/bids
 exports.addBid = asyncHandler(async (req, res) => {
   const { buyer, product, bidAmount } = req.body;
-  const buyerId = await Buyer.findOne({ _id: buyer });
-  const productId = await Product.findOne({ _id: product });
+  const buyerId = req.user.id;
+  const productId = await Product.findById(product);
   const bid = await Bids.create({
     buyer: buyerId,
     product: productId,
     bidAmount
   });
-  res.status(200).json({
+  res.status(201).json({
     success: true,
     data: bid
   });

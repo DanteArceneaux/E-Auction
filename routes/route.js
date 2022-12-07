@@ -13,23 +13,6 @@ const {
   deleteProductById
 } = require("../controllers/product.controller"); // Import the Product controller
 
-//Import the Sellers controller
-const {
-  getSellers,
-  addSeller,
-  getSellerById,
-  updateSellerById,
-  deleteSellerById
-} = require("../controllers/seller.controller");
-
-const {
-  getBuyers,
-  addBuyer,
-  getBuyerById,
-  updateBuyerById,
-  deleteBuyerById
-} = require("../controllers/buyer.controller");
-
 const { getBids, addBid } = require("../controllers/bids.controller.js");
 
 /* *** AUTHORIZE MUST GO AFTER PROTECT *** */
@@ -37,6 +20,7 @@ const { getBids, addBid } = require("../controllers/bids.controller.js");
 //get all products
 router.route("/products").get(getProducts);
 
+//add a new product
 router
   .route("/products/add-product")
   .post(protect, authorize("seller"), addProduct); // This is the same as app.post("/api/sellers/add-product", (req, res) => { ... })
@@ -53,46 +37,6 @@ router.route("/products/:id").get(getProductById);
 router
   .route("/products/update/:id")
   .put(protect, authorize("seller"), updateProductById);
-
-//get all sellers
-router.route("/sellers").get(getSellers);
-
-//add a new seller
-router
-  .route("/sellers/add-seller")
-  .post(protect, authorize("seller"), addSeller);
-
-//get seller by ID
-router.route("/sellers/:id").get(getSellerById);
-
-//update seller by id
-router
-  .route("/sellers/update/:id")
-  .put(protect, authorize("seller"), updateSellerById);
-
-//delete a seller by id
-router
-  .route("/sellers/delete/:id")
-  .delete(protect, authorize("seller"), deleteSellerById);
-
-//get all buyers
-router.route("/buyers").get(getBuyers);
-
-//add a new buyer
-router.route("/buyers/add-buyer").post(protect, authorize("buyer"), addBuyer);
-
-//get buyer by ID
-router.route("/buyers/:id").get(getBuyerById);
-
-//update buyer by id
-router
-  .route("/buyers/update/:id")
-  .put(protect, authorize("buyer"), updateBuyerById);
-
-//delete a buyer by id
-router
-  .route("/buyers/delete/:id")
-  .delete(protect, authorize("buyer"), deleteBuyerById);
 
 //get all bids
 router.route("/bids").get(getBids);

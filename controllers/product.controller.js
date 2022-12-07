@@ -1,5 +1,6 @@
 const Product = require("../models/Product.model.js");
 const asyncHandler = require("../middleware/async.js");
+const User = require("../models/User.model.js");
 
 //@dec    Get all products
 //@route   GET /api/v1/sellers/products
@@ -61,21 +62,28 @@ exports.getProductByBidEndDate = asyncHandler(async (req, res) => {
 
 //@desc    Add a new product
 //@route   POST /api/v1/sellers/add-product
-exports.addProduct = asyncHandler(async (req, res, next) => {
-  req.body.seller = req.user.id;
+exports.addProduct = asyncHandler(async (req, res) => {
+  const {
+    productName,
+    shortDescription,
+    detailedDescription,
+    productCategory,
+    startingPrice,
+    bidEndDate,
+    seller
+  } = req.body;
 
-  const publishedProduct = await Product.findOne({ seller: req.user.id });
+  const sellerId = req.user.id;
 
-  if (req.user.role !== "seller") {
-    return next(
-      new ErrorResponse(
-        `User with id ${req.user.id} is not authorized to add a product`,
-        401
-      )
-    );
-  }
-
-  const product = await Product.create(req.body);
+  const product = await Product.create({
+    productName,
+    shortDescription,
+    detailedDescription,
+    productCategory,
+    startingPrice,
+    bidEndDate,
+    seller: sellerId
+  });
 
   res.status(201).json({
     success: true,

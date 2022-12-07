@@ -6,7 +6,16 @@ const ErrorResponse = require("../utils/errorResponse.js");
 // @route   POST /api/v1/auth/register
 
 exports.register = asyncHandler(async (req, res, next) => {
-  const { firstName, lastName, email, pin, phone, role } = req.body;
+  const {
+    firstName,
+    lastName,
+    email,
+    pin,
+    phone,
+    role,
+    state,
+    city
+  } = req.body;
 
   // Create user
   const user = await User.create({
@@ -15,7 +24,9 @@ exports.register = asyncHandler(async (req, res, next) => {
     email,
     pin,
     phone,
-    role
+    role,
+    state,
+    city
   });
 
   sendTokenResponse(user, 200, res);

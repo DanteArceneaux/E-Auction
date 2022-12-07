@@ -72,7 +72,6 @@ const UserSchema = new mongoose.Schema({
     select: false, // Don't show pin in response
     maxlength: [6, "Pin can not be more than 4 characters"],
     trim: true,
-
     validate: {
       validator: function(v) {
         return v.toString().length <= 6;
