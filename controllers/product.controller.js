@@ -1,6 +1,7 @@
 const Product = require("../models/Product.model.js");
 const asyncHandler = require("../middleware/async.js");
 const User = require("../models/User.model.js");
+const ErrorResponse = require("../utils/errorResponse.js");
 
 //@dec    Get all products
 //@route   GET /api/v1/sellers/products
@@ -62,7 +63,7 @@ exports.getProductByBidEndDate = asyncHandler(async (req, res) => {
 
 //@desc    Add a new product
 //@route   POST /api/v1/sellers/add-product
-exports.addProduct = asyncHandler(async (req, res) => {
+exports.addProduct = asyncHandler(async (req, res, next) => {
   const {
     productName,
     shortDescription,
@@ -84,6 +85,16 @@ exports.addProduct = asyncHandler(async (req, res) => {
     bidEndDate,
     seller: sellerId
   });
+
+  //Error handling if bidEndDate is not in the future
+  if (product.bidEndDate < Date.now()) {
+    return next(
+      new ErrorResponse(
+        `Bid end date must be in the future. Bid end date: ${product.bidEndDate}`,
+        400
+      )
+    );
+  }
 
   res.status(201).json({
     success: true,
@@ -129,6 +140,14 @@ exports.deleteProductById = async (req, res) => {
       });
     }
 
+    //if product is past bidEndDate, it cannot be deleted
+    if (product.bidEndDate < Date.now()) {
+      return res.status(400).json({
+        success: false,
+        error: "Cannot delete a product past bidEndDate"
+      });
+    }
+
     await product.remove();
 
     res.status(200).json({
@@ -140,7 +159,6 @@ exports.deleteProductById = async (req, res) => {
       success: false,
       error: err.message
     });
-
     console.log(err.message.red.bold);
   }
 };

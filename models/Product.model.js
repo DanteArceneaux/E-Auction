@@ -1,6 +1,9 @@
 const mongoose = require("mongoose");
 const slugify = require("slugify");
 
+let d = new Date(Date.now());
+d.toString();
+
 const ProductSchema = new mongoose.Schema({
   //seller
 
@@ -43,8 +46,12 @@ const ProductSchema = new mongoose.Schema({
   },
   bidEndDate: {
     type: Date,
-    validate: function(input) {
-      return input > Date.now();
+    //date must be in the future
+    validate: {
+      validator: function(v) {
+        return v > Date.now();
+      },
+      message: `Bid end date must be in the future.  Todays date is: ${d}}`
     },
     required: [true, "Please add a bid end date [must be in the future]"],
     trim: true

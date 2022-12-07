@@ -19,7 +19,7 @@ exports.getBids = asyncHandler(async (req, res) => {
 
 //@dec    Create a new bid
 //@route   POST /api/v1/bids
-exports.addBid = asyncHandler(async (req, res) => {
+exports.addBid = asyncHandler(async (req, res, next) => {
   const { buyer, product, bidAmount } = req.body;
   const buyerId = req.user.id;
   const productId = await Product.findById(product);
@@ -28,6 +28,13 @@ exports.addBid = asyncHandler(async (req, res) => {
     product: productId,
     bidAmount
   });
+
+  //one buyer can only bid once
+  const buyerBids = await Bids.find({ buyer: buyerId });
+  if (buyerBids.length > 1) {
+    return next(new ErrorResponse(`You can only bid once`, 400));
+  }
+
   res.status(201).json({
     success: true,
     data: bid

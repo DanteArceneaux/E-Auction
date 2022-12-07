@@ -3,7 +3,11 @@ const router = Routes.Router(); // Create a router
 
 const { protect, authorize } = require("../middleware/auth.middleware");
 
-const { getUsers, addUser } = require("../controllers/user.controller");
+const {
+  getUsers,
+  addUser,
+  getUserById
+} = require("../controllers/user.controller");
 
 const {
   updateProductById,
@@ -49,5 +53,8 @@ router.route("/users").get(getUsers);
 
 //add a new user
 router.route("/users/add-user").post(addUser);
+
+//get user by ID
+router.route("/users/:id").get(getUserById);
 
 module.exports = router; // Export the seller router
