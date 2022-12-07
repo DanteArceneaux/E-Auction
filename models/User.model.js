@@ -19,10 +19,14 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please add a first name"],
     notNull: true,
+    minlength: [5, "First name must be at least 5 characters"],
+    maxlength: [30, "First name can not be more than 30 characters"],
     trim: true
   },
   lastName: {
     type: String,
+    minlength: [5, "Last name must be at least 2 characters"],
+    maxlength: [30, "Last name can not be more than 30 characters"],
     required: [true, "Please add a last name"],
     notNull: true,
     trim: true
@@ -43,14 +47,14 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     required: [true, "Please add a phone number (must be a number)"],
     notNull: true,
-    minlength: [
-      10,
-      "Phone number must be at least 10 digits (must be a number)"
-    ],
-    max_length: [
-      10,
-      "Phone number can not be more than 10 digits (must be a number)"
-    ],
+    validate: {
+      validator: function(v) {
+        return v.toString().length === 10;
+      },
+      message: props =>
+        `${props.value} is not a valid phone number! Must be 10 digits long.`
+    },
+
     trim: true
   },
 
@@ -81,20 +85,6 @@ const UserSchema = new mongoose.Schema({
     }
   },
 
-  phone: {
-    type: Number,
-    required: [true, "Please add a phone number (must be a number)"],
-    notNull: true,
-    minlength: [
-      10,
-      "Phone number must be at least 10 digits (must be a number)"
-    ],
-    max_length: [
-      12,
-      "Phone number can not be more than 12 digits (must be a number)"
-    ],
-    trim: true
-  },
   resetPinToken: String,
   resetPinExpire: Date,
   createdAt: {
