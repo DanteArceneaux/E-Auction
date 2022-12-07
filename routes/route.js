@@ -1,6 +1,8 @@
 const Routes = require("express"); // Import express
 const router = Routes.Router(); // Create a router
 
+const { protect } = require("../middleware/auth.middleware");
+
 const {
   updateProductById,
   getProductById,
@@ -31,51 +33,51 @@ const { getBids, addBid } = require("../controllers/bids.controller.js");
 //get all products
 router.route("/products").get(getProducts);
 
-router.route("/products/add-product").post(addProduct); // This is the same as app.post("/api/sellers/add-product", (req, res) => { ... })
+router.route("/products/add-product").post(protect, addProduct); // This is the same as app.post("/api/sellers/add-product", (req, res) => { ... })
 
 //delete a product by id
-router.route("/products/delete/:id").delete(deleteProductById);
+router.route("/products/delete/:id").delete(protect, deleteProductById);
 
 //get product by ID
 router.route("/products/:id").get(getProductById);
 
 //update product by id
-router.route("/products/update/:id").put(updateProductById);
+router.route("/products/update/:id").put(protect, updateProductById);
 
 //get all sellers
 router.route("/sellers").get(getSellers);
 
 //add a new seller
-router.route("/sellers/add-seller").post(addSeller);
+router.route("/sellers/add-seller").post(protect, addSeller);
 
 //get seller by ID
 router.route("/sellers/:id").get(getSellerById);
 
 //update seller by id
-router.route("/sellers/update/:id").put(updateSellerById);
+router.route("/sellers/update/:id").put(protect, updateSellerById);
 
 //delete a seller by id
-router.route("/sellers/delete/:id").delete(deleteSellerById);
+router.route("/sellers/delete/:id").delete(protect, deleteSellerById);
 
 //get all buyers
 router.route("/buyers").get(getBuyers);
 
 //add a new buyer
-router.route("/buyers/add-buyer").post(addBuyer);
+router.route("/buyers/add-buyer").post(protect, addBuyer);
 
 //get buyer by ID
 router.route("/buyers/:id").get(getBuyerById);
 
 //update buyer by id
-router.route("/buyers/update/:id").put(updateBuyerById);
+router.route("/buyers/update/:id").put(protect, updateBuyerById);
 
 //delete a buyer by id
-router.route("/buyers/delete/:id").delete(deleteBuyerById);
+router.route("/buyers/delete/:id").delete(protect, deleteBuyerById);
 
 //get all bids
 router.route("/bids").get(getBids);
 
 //create a new bid
-router.route("/bids/add-bid").post(addBid);
+router.route("/bids/add-bid").post(protect, addBid);
 
 module.exports = router; // Export the seller router
