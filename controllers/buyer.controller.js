@@ -1,11 +1,11 @@
 const Buyer = require("../models/buyer.model.js");
-const Product = require("../models/Product.model.js");
+
 const asyncHandler = require("../middleware/async.js");
 
 const ErrorResponse = require("../utils/errorResponse.js");
 
-//@dec    Get all products
-//@route   GET /api/v1/buyers/products
+//@dec    Get all buyers
+//@route   GET /api/v1/buyers/
 exports.getBuyers = asyncHandler(async (req, res) => {
   const buyers = await Buyer.find();
   res.status(200).json({
@@ -18,7 +18,7 @@ exports.getBuyers = asyncHandler(async (req, res) => {
 //@desc    Add a new buyer
 //@route   POST /api/v1/buyers/add-buyer
 
-//add buyer if productId exists when creating buyer
+//add buyer if buyerID exists when creating buyer
 exports.addBuyer = async (req, res) => {
   try {
     await Buyer.create(req.body).then(buyer => {
@@ -37,8 +37,8 @@ exports.addBuyer = async (req, res) => {
   }
 };
 
-//@desc   Get product by id
-//@route  GET /api/v1/buyers/product/{productId}
+//@desc   Get buyer by id
+//@route  GET /api/v1/buyers/{buyerID}
 exports.getBuyerById = async (req, res, next) => {
   try {
     const buyers = await Buyer.findById(req.params.id);
@@ -63,8 +63,8 @@ exports.getBuyerById = async (req, res, next) => {
   }
 };
 
-//@desc    Delete a product by id
-//@route   GET /api/v1/buyers/delete/{productId}
+//@desc    Delete a buyer by id
+//@route   GET /api/v1/buyers/delete/{buyerId}
 exports.deleteBuyerById = async (req, res) => {
   try {
     const buyer = await Buyer.findById(req.params.id);
@@ -72,7 +72,7 @@ exports.deleteBuyerById = async (req, res) => {
     if (!buyer) {
       return res.status(404).json({
         success: false,
-        error: "No product found"
+        error: "No buyer found"
       });
     }
 
@@ -92,32 +92,25 @@ exports.deleteBuyerById = async (req, res) => {
   }
 };
 
-//@desc    Update a product by id
-//@route   PUT /api/v1/buyers/update/{productId}
-exports.updateBuyerById = async (req, res) => {
-  try {
-    const buyers = await Buyer.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+//@desc    Update a buyer by id
+//@route   PUT /api/v1/buyers/update/{buyerId}
+exports.updateBuyerById = asyncHandler(async (req, res, next) => {
+  const buyer = await Buyer.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
 
-    if (!buyers) {
-      return res.status(404).json({
-        success: false,
-        error: "No product found"
-      });
-    }
+  console.log(req.params.id);
 
-    res.status(200).json({
-      success: true,
-      data: buyers
-    });
-  } catch (err) {
-    res.status(400).json({
+  if (!buyer) {
+    return res.status(404).json({
       success: false,
-      error: err.message
+      error: "No buyer found"
     });
-
-    console.log(err.message.red.bold);
   }
-};
+
+  res.status(200).json({
+    success: true,
+    data: buyer
+  });
+});

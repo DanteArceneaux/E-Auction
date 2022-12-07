@@ -1,4 +1,5 @@
 const Seller = require("../models/Seller.model.js");
+const asyncHandler = require("../middleware/async.js");
 
 //@dec    Get all products
 //@route   GET /api/v1/sellers/products
@@ -90,32 +91,26 @@ exports.deleteSellerById = async (req, res) => {
   }
 };
 
-//@desc    Update a product by id
-//@route   PUT /api/v1/sellers/update/{productId}
-exports.updateSellerById = async (req, res) => {
-  try {
-    const seller = await Seller.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true
-    });
+//@desc    Update a seller by id
+//@route   PUT /api/v1/sellers/update/{sellerId}
+exports.updateSellerById = asyncHandler(async (req, res) => {
+  const seller = await Seller.findByIdAndUpdate(req.params.id, req.body, {
+    new: true,
+    runValidators: true
+  });
 
-    if (!seller) {
-      return res.status(404).json({
-        success: false,
-        error: "No product found"
-      });
-    }
+  //log seller id
+  console.log(req.params.id);
 
-    res.status(200).json({
-      success: true,
-      data: seller
-    });
-  } catch (err) {
-    res.status(400).json({
+  if (!seller) {
+    return res.status(404).json({
       success: false,
-      error: err.message
+      error: "No seller found"
     });
-
-    console.log(err.message.red.bold);
   }
-};
+
+  res.status(200).json({
+    success: true,
+    data: seller
+  });
+});
