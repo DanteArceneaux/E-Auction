@@ -31,6 +31,7 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: [true, "Please add an email"],
     notNull: true,
+    unique: true,
     match: [
       /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/,
       "Please add a valid email"
@@ -92,6 +93,8 @@ UserSchema.methods.getSignedJwtToken = function() {
 
 // match user entered pin to pin in database
 UserSchema.methods.matchPin = async function(enteredPin) {
+  console.log("enteredPin: ", enteredPin);
+  console.log("this.pin: ", this.pin);
   if (enteredPin === this.pin) {
     return true;
   } else {

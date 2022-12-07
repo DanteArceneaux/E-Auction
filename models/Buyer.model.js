@@ -96,16 +96,16 @@ const buyerSchema = new mongoose.Schema({
       },
       message: props => `${props.value} is not a valid product id`
     }
-  },
-
-  bidAmount: {
-    type: Number,
-    required: [true, "Please add a bid amount"],
-    notNull: true,
-    min: [1, "Bid amount must be at least 1"],
-    max: [100000, "Bid amount can not be more than 100000"],
-    trim: true
   }
+
+  // bidAmount: {
+  //   type: Number,
+  //   required: [true, "Please add a bid amount"],
+  //   notNull: true,
+  //   min: [1, "Bid amount must be at least 1"],
+  //   max: [100000, "Bid amount can not be more than 100000"],
+  //   trim: true
+  // }
 });
 
 module.exports = mongoose.model("Buyer", buyerSchema);
