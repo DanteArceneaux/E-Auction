@@ -5,7 +5,7 @@ const connectDB = require("./config/db"); // Import the database connection
 const colors = require("colors"); // Import morgan
 const cookieParser = require("cookie-parser"); // Import cookie-parser
 const errorHandler = require("./middleware/error"); // Import the error handler
-const auth = require("./routes/auth"); // Import the auth routes
+const auth = require("./routes/auth.route"); // Import the auth route
 
 // Load environment variables from .env file
 dotenv.config({
@@ -21,7 +21,7 @@ const Router = require("./routes/route");
 const app = express(); // Create an express app
 
 //cookie parser
-app.use(cookieParser());
+app.use(cookieParser()); // Parse incoming request cookies
 
 // Dev Logging Middleware (morgan)
 if (process.env.NODE_ENV === "development") {

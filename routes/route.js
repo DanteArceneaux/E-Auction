@@ -26,6 +26,8 @@ const {
   deleteBuyerById
 } = require("../controllers/buyer.controller");
 
+const { getBids, addBid } = require("../controllers/bids.controller.js");
+
 //get all products
 router.route("/products").get(getProducts);
 
@@ -69,5 +71,11 @@ router.route("/buyers/update/:id").put(updateBuyerById);
 
 //delete a buyer by id
 router.route("/buyers/delete/:id").delete(deleteBuyerById);
+
+//get all bids
+router.route("/bids").get(getBids);
+
+//create a new bid
+router.route("/bids/add-bid").post(addBid);
 
 module.exports = router; // Export the seller router
