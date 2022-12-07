@@ -46,6 +46,12 @@ const ProductSchema = new mongoose.Schema({
     },
     required: [true, "Please add a bid end date [must be in the future]"],
     trim: true
+  },
+  //seller
+  user: {
+    type: mongoose.Schema.ObjectId,
+    ref: "User",
+    required: true
   }
 });
 

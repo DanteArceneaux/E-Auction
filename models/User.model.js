@@ -27,6 +27,33 @@ const UserSchema = new mongoose.Schema({
     notNull: true,
     trim: true
   },
+  city: {
+    type: String,
+    required: [true, "Please add a city"],
+    notNull: true,
+    trim: true
+  },
+  state: {
+    type: String,
+    required: [true, "Please add a state"],
+    notNull: true,
+    trim: true
+  },
+  phone: {
+    type: Number,
+    required: [true, "Please add a phone number (must be a number)"],
+    notNull: true,
+    minlength: [
+      10,
+      "Phone number must be at least 10 digits (must be a number)"
+    ],
+    max_length: [
+      10,
+      "Phone number can not be more than 10 digits (must be a number)"
+    ],
+    trim: true
+  },
+
   email: {
     type: String,
     required: [true, "Please add an email"],

@@ -61,23 +61,27 @@ exports.getProductByBidEndDate = asyncHandler(async (req, res) => {
 
 //@desc    Add a new product
 //@route   POST /api/v1/sellers/add-product
-exports.addProduct = async (req, res) => {
-  try {
-    await Product.create(req.body).then(product => {
-      res.status(201).json({
-        success: true,
-        data: product
-      });
-    });
-  } catch (err) {
-    res.status(400).json({
-      success: false,
-      error: err.message
-    });
+exports.addProduct = asyncHandler(async (req, res, next) => {
+  req.body.seller = req.user.id;
 
-    console.log(err.message.red.bold);
+  const publishedProduct = await Product.findOne({ seller: req.user.id });
+
+  if (req.user.role !== "seller") {
+    return next(
+      new ErrorResponse(
+        `User with id ${req.user.id} is not authorized to add a product`,
+        401
+      )
+    );
   }
-};
+
+  const product = await Product.create(req.body);
+
+  res.status(201).json({
+    success: true,
+    data: product
+  });
+});
 
 //@desc   Get product by id
 //@route  GET /api/v1/sellers/product/{productId}

@@ -19,23 +19,13 @@ exports.getSellers = async (req, res) => {
 
 //@desc    Add a new product
 //@route   POST /api/v1/sellers/add-product
-exports.addSeller = async (req, res) => {
-  try {
-    await Seller.create(req.body).then(seller => {
-      res.status(201).json({
-        success: true,
-        data: seller
-      });
-    });
-  } catch (err) {
-    res.status(400).json({
-      success: false,
-      error: err.message
-    });
-
-    console.log(err.message.red.bold);
-  }
-};
+exports.addSeller = asyncHandler(async (req, res, next) => {
+  const seller = await Seller.create(req.body);
+  res.status(201).json({
+    success: true,
+    data: seller
+  });
+});
 
 //@desc   Get product by id
 //@route  GET /api/v1/sellers/product/{productId}

@@ -1,5 +1,5 @@
 const asyncHandler = require("../middleware/async.js");
-const User = require("../models/User.js");
+const User = require("../models/User.model.js");
 const ErrorResponse = require("../utils/errorResponse.js");
 
 // @desc    Register user
