@@ -31,6 +31,16 @@ if (process.env.NODE_ENV === "development") {
 // This is a middleware function that parses incoming requests with JSON payloads and is based on body-parser
 app.use(express.json());
 
+//CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header(
+    "Access-Control-Allow-Headers",
+    "Origin, X-Requested-With, Content-Type, Accept"
+  );
+  next();
+});
+
 //Mount routers
 
 app.use("/e-auction/api/v1/", Router);

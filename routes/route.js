@@ -14,7 +14,8 @@ const {
   getProductById,
   getProducts,
   addProduct,
-  deleteProductById
+  deleteProductById,
+  getProductByProductName
 } = require("../controllers/product.controller"); // Import the Product controller
 
 const { getBids, addBid } = require("../controllers/bids.controller.js");
@@ -36,6 +37,9 @@ router
 
 //get product by ID
 router.route("/products/:id").get(getProductById);
+
+//get product by productName
+router.route("/products/productName/:productName").get(getProductByProductName);
 
 //update product by id
 router

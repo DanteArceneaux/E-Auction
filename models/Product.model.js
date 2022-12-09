@@ -5,8 +5,6 @@ let d = new Date(Date.now());
 d.toString();
 
 const ProductSchema = new mongoose.Schema({
-  //seller
-
   productName: {
     type: String,
     unique: true,

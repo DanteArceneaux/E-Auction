@@ -8,8 +8,6 @@ const ErrorResponse = require("../utils/errorResponse.js");
 exports.getProducts = asyncHandler(async (req, res) => {
   const products = await Product.find();
   res.status(200).json({
-    success: true,
-    count: products.length,
     data: products
   });
 });
@@ -22,6 +20,19 @@ exports.getProductsByCategory = asyncHandler(async (req, res) => {
     success: true,
     count: products.length,
     data: products
+  });
+});
+
+//@desc Get product by productName
+//@route GET /api/v1/sellers/product/productName/{productName}
+
+exports.getProductByProductName = asyncHandler(async (req, res) => {
+  const product = await Product.find({ productName: req.params.productName });
+
+  res.status(200).json({
+    success: true,
+    count: product.length,
+    data: product
   });
 });
 

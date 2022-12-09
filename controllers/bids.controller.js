@@ -87,14 +87,20 @@ exports.getBids = asyncHandler(async (req, res, next) => {
 //@dec    Create a new bid
 //@route   POST /api/v1/bids
 exports.addBid = asyncHandler(async (req, res, next) => {
-  const { buyer, product, bidAmount } = req.body;
-  const buyerId = req.user.id;
-  const productId = await Product.findById(product);
-  const bid = await Bids.create({
-    buyer: buyerId,
-    product: productId,
-    bidAmount
-  });
+  const bid = await Bids.create(req.body);
+
+  const {
+    buyerId,
+    productId,
+    bidAmount,
+    productName,
+    shortDescription,
+    detailedDescription,
+    productCategory,
+    startingPrice,
+    bidEndDate,
+    seller
+  } = req.body;
 
   //one buyer can only bid once
   const buyerBids = await Bids.find({ buyer: buyerId });
