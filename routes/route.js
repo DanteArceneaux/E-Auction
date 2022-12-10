@@ -18,7 +18,11 @@ const {
   getProductByProductName
 } = require("../controllers/product.controller"); // Import the Product controller
 
-const { getBids, addBid } = require("../controllers/bids.controller.js");
+const {
+  getBids,
+  addBid,
+  getBidByProductName
+} = require("../controllers/bids.controller.js");
 
 /* *** AUTHORIZE MUST GO AFTER PROTECT *** */
 
@@ -60,5 +64,8 @@ router.route("/users/add-user").post(addUser);
 
 //get user by ID
 router.route("/users/:id").get(getUserById);
+
+//get bid by productName
+router.route("/bids/productName/:productName").get(getBidByProductName);
 
 module.exports = router; // Export the seller router

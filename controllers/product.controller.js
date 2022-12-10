@@ -5,9 +5,24 @@ const ErrorResponse = require("../utils/errorResponse.js");
 
 //@dec    Get all products
 //@route   GET /api/v1/sellers/products
-exports.getProducts = asyncHandler(async (req, res) => {
-  const products = await Product.find();
+//use lookup to combine product with the bid information
+exports.getProducts = asyncHandler(async (req, res, next) => {
+  //lookup
+  const products = await Product.aggregate([
+    {
+      $lookup: {
+        from: "bids",
+
+        localField: "_id",
+        foreignField: "product",
+        as: "bids"
+      }
+    }
+    //unwind bids and products
+  ]);
   res.status(200).json({
+    success: true,
+    count: products.length,
     data: products
   });
 });
@@ -27,12 +42,16 @@ exports.getProductsByCategory = asyncHandler(async (req, res) => {
 //@route GET /api/v1/sellers/product/productName/{productName}
 
 exports.getProductByProductName = asyncHandler(async (req, res) => {
-  const product = await Product.find({ productName: req.params.productName });
+  //use lookup to combine product with the bid information
+
+  const products = await Product.find({
+    productName: req.params.productName
+  });
 
   res.status(200).json({
     success: true,
-    count: product.length,
-    data: product
+    count: products.length,
+    data: products
   });
 });
 

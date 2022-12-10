@@ -30,7 +30,8 @@ exports.getBids = asyncHandler(async (req, res, next) => {
   query = Bids.find(JSON.parse(queryStr)).populate({
     path: "product",
     //shortDescription, detailedDescription, productCategory, bidEndDate
-    select: "shortDescription detailedDescription productCategory bidEndDate"
+    select:
+      "productName shortDescription detailedDescription productCategory bidEndDate"
   });
 
   //Select Fields
@@ -111,5 +112,16 @@ exports.addBid = asyncHandler(async (req, res, next) => {
   res.status(201).json({
     success: true,
     data: bid
+  });
+});
+
+//@desc    Get bid by productName
+//@route   GET /api/v1/bids/productName/{productName}
+exports.getBidByProductName = asyncHandler(async (req, res) => {
+  const bids = await Bids.find({ productName: req.params.productName });
+  res.status(200).json({
+    success: true,
+    count: bids.length,
+    data: bids
   });
 });

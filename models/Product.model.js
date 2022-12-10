@@ -5,6 +5,11 @@ let d = new Date(Date.now());
 d.toString();
 
 const ProductSchema = new mongoose.Schema({
+  bids: {
+    type: mongoose.Schema.ObjectId,
+    ref: "Bids",
+    required: false
+  },
   productName: {
     type: String,
     unique: true,
