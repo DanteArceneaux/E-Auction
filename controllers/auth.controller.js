@@ -32,9 +32,10 @@ exports.register = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
+// *****************************************************************************************
+
 // @desc    Login user
 // @route   POST /api/v1/auth/login
-
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, pin } = req.body;
 
@@ -77,6 +78,8 @@ const sendTokenResponse = (user, statusCode, res) => {
   if (process.env.NODE_ENV === "production") {
     options.secure = true;
   }
+
+  console.log(token);
 
   res
     .status(statusCode)
