@@ -47,4 +47,25 @@ const bidsSchema = new mongoose.Schema({
   }
 });
 
+//pre save hook to allow one bid based on email per product
+bidsSchema.pre("save", async function(done) {
+  if (this.isNew) {
+    const bid = await this.constructor
+      .findOne({ email: this.email, product: this.product })
+      .populate({
+        path: "product",
+        select: "bidEndDate"
+      });
+    if (bid) {
+      if (bid.product.bidEndDate > Date.now()) {
+        throw new ErrorResponse(
+          `You have already placed a bid on this product`,
+          400
+        );
+      }
+    }
+  }
+  done();
+});
+
 module.exports = mongoose.model("Bids", bidsSchema);

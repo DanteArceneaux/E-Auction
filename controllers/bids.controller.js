@@ -5,6 +5,12 @@ const Bids = require("../models/Bids.model.js");
 const asyncHandler = require("../middleware/async.js");
 
 const ErrorResponse = require("../utils/errorResponse.js");
+const { count } = require("../models/User.model.js");
+const { idText } = require("typescript");
+const { array } = require("prop-types");
+
+const pastBidsArray = [];
+const currentBidArray = [];
 
 //@dec    Get all bids
 //@route   GET /api/v1/bids
@@ -100,14 +106,9 @@ exports.addBid = asyncHandler(async (req, res, next) => {
     productCategory,
     startingPrice,
     bidEndDate,
-    seller
+    seller,
+    email
   } = req.body;
-
-  //one buyer can only bid once
-  const buyerBids = await Bids.find({ buyer: buyerId });
-  if (buyerBids.length > 1) {
-    return next(new ErrorResponse(`You can only bid once`, 400));
-  }
 
   res.status(201).json({
     success: true,
