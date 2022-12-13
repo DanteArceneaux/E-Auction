@@ -6,12 +6,12 @@ const bidsSchema = new mongoose.Schema({
   buyer: {
     type: mongoose.Schema.ObjectId,
     ref: "Buyer",
-    required: true
+    required: false
   },
   product: {
     type: mongoose.Schema.ObjectId,
     ref: "Product",
-    required: true
+    required: false
   },
   firstName: {
     type: String,
