@@ -4,7 +4,8 @@
  "description": "",
  "main": "index.js",
  "scripts": {
-  "test": "jest",
+  "test": "jest --runInBand --coverage --forceExit",
+  "test:watch": "jest --detectOpenHandles",
   "start": "SET NODE_ENV=production && node server.js",
   "dev": "nodemon server.js"
  },

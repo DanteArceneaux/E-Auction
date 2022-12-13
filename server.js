@@ -63,5 +63,7 @@ const server = app.listen(
   )
 );
 
+server.closeAllConnections();
+
 //export
 module.exports = app;

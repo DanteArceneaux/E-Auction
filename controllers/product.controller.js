@@ -2,6 +2,7 @@ const Product = require("../models/Product.model.js");
 const asyncHandler = require("../middleware/async.js");
 const User = require("../models/User.model.js");
 const ErrorResponse = require("../utils/errorResponse.js");
+const Bid = require("../models/Bids.model.js");
 
 //@dec    Get all products
 //@route   GET /api/v1/sellers/products
@@ -170,11 +171,12 @@ exports.deleteProductById = async (req, res) => {
       });
     }
 
-    //if product is past bidEndDate, it cannot be deleted
-    if (product.bidEndDate < Date.now()) {
+    //find bids associated with the product
+    const bids = await Bid.find({ product: req.params.id });
+    if (bids.length > 0) {
       return res.status(400).json({
         success: false,
-        error: "Cannot delete a product past bidEndDate"
+        error: "Cannot delete a product with bids"
       });
     }
 
