@@ -1,16 +1,6 @@
 const User = require("../models/User.model.js");
-
-const Product = require("../models/Product.model.js");
 const Bids = require("../models/Bids.model.js");
 const asyncHandler = require("../middleware/async.js");
-
-const ErrorResponse = require("../utils/errorResponse.js");
-const { count } = require("../models/User.model.js");
-const { idText } = require("typescript");
-const { array } = require("prop-types");
-
-const pastBidsArray = [];
-const currentBidArray = [];
 
 //@dec    Get all bids
 //@route   GET /api/v1/bids
@@ -120,6 +110,17 @@ exports.addBid = asyncHandler(async (req, res, next) => {
 //@route   GET /api/v1/bids/productName/{productName}
 exports.getBidByProductName = asyncHandler(async (req, res) => {
   const bids = await Bids.find({ productName: req.params.productName });
+  res.status(200).json({
+    success: true,
+    count: bids.length,
+    data: bids
+  });
+});
+
+//@desc    Get bid by specific email
+//@route   GET /api/v1/bids/email/{email}
+exports.getBidByEmail = asyncHandler(async (req, res) => {
+  const bids = await Bids.find({ email: req.params.email });
   res.status(200).json({
     success: true,
     count: bids.length,

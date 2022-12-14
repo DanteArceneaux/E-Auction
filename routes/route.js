@@ -21,10 +21,32 @@ const {
 const {
   getBids,
   addBid,
-  getBidByProductName
+  getBidByProductName,
+  getBidByEmail
 } = require("../controllers/bids.controller.js");
 
 /* *** AUTHORIZE MUST GO AFTER PROTECT *** */
+
+/**
+ * @swagger
+ * /e-auction/api/v1/products:
+ *  get:
+ *   description: Use to request all products
+ *  responses:
+ *  '200':
+ *   description: A successful response
+ * content:
+ * application/json:
+ * schema:
+ * type: array
+ * items:
+ * $ref: '#/components/schemas/Product'
+ * components:
+ * schemas:
+ * Product:
+ * type: object
+ *
+ */
 
 //get all products
 router.route("/products").get(getProducts);
@@ -55,6 +77,9 @@ router.route("/bids").get(getBids);
 
 //create a new bid
 router.route("/bids/add-bid").post(protect, authorize("buyer"), addBid);
+
+//get bid by getBidByEmail
+router.route("/bids/email/:email").get(getBidByEmail);
 
 //get all users
 router.route("/users").get(getUsers);
