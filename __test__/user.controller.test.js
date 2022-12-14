@@ -27,7 +27,9 @@ describe("POST /e-auction/api/v1/users", () => {
         role: "buyer",
         firstName: "testtest",
         lastName: "testtest",
-        email: "testtt45dt@gmail.com",
+        //random email address with 5 digits
+        email: "testtest" + Math.floor(Math.random() * 100000) + "@gmail.com",
+
         pin: 1234,
         address: "342 E. Foss",
         phone: 1234567890,
