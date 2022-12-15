@@ -153,9 +153,41 @@ paths:
           schema:
             type: "application/json"
 
-
-  
-
+  # post new user
+  /users/add-user: 
+    post:
+      summary: Posting a new user
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      description: "Posting a new user. Role MUST be buyer or seller"
+      parameters:
+        - in: body
+          name: user
+          schema:
+            type: object
+            properties:
+              role:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              phone:
+                type: integer
+              email:
+                type: string
+        
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
 
 
       
