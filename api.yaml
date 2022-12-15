@@ -86,9 +86,73 @@ paths:
                 bidAMount: 100
                 createdAt: "2020-01-01 00:00:00"
                 __v: 0
-            
-            
-            
+
+  #  get user by id
+  /users/{id}:
+    get:
+      summary: "Get user by id"
+      description: "Returns user by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of user to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
+  #  get product by id
+  /products/{id}:
+    get:
+      summary: "Get product by id"
+      description: "Returns product by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of product to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+  #  get bid by product name
+  /bids/productName/{productName}:
+    get:
+      summary: "Get bid by product name"
+      description: "Returns bid by product name"
+      parameters:
+        - name: "name"
+          in: "path"
+          description: "Name of product to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+  # get bids by email 
+  /bids/email/{email}:
+    get:
+      summary: "Get bid by email"
+      description: "Returns bid by email"
+      parameters:
+        - name: "email"
+          in: "path"
+          description: "Email of user to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
 
   
 
