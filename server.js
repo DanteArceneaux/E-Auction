@@ -2,10 +2,13 @@ const express = require("express"); // Import express
 const dotenv = require("dotenv"); // Load environment variables from .env file
 const morgan = require("morgan"); // Import morgan
 const connectDB = require("./config/db"); // Import the database connection
-const colors = require("colors"); // Import morgan
+const colors = require("colors"); // Import colors
 const cookieParser = require("cookie-parser"); // Import cookie-parser
 const errorHandler = require("./middleware/error"); // Import the error handler
 const auth = require("./routes/auth.route"); // Import the auth route
+const swaggerUI = require("swagger-ui-express"); // Import swagger-ui-express
+const YAML = require("yamljs"); // Import yamljs
+const swaggerJsDocs = YAML.load("./api.yaml"); // Load the swagger.yaml file
 
 // Load environment variables from .env file
 dotenv.config({
@@ -30,6 +33,12 @@ if (process.env.NODE_ENV === "development") {
 
 // This is a middleware function that parses incoming requests with JSON payloads and is based on body-parser
 app.use(express.json());
+
+app.use(
+  "/e-auction/api/v1/docs",
+  swaggerUI.serve,
+  swaggerUI.setup(swaggerJsDocs)
+);
 
 //CORS
 app.use(function(req, res, next) {
@@ -57,7 +66,7 @@ const PORT = process.env.PORT || 5000; // 5000 is the default port
 if (process.env.NODE_ENV !== "test") {
   app.listen(PORT, () =>
     console.log(
-      `\n Server running in ${process.env.NODE_ENV} mode on port ${PORT}`
+      `\n Server running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}`
         .brightBlue.bold
     )
   );
