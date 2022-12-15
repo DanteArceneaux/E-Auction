@@ -39,3 +39,25 @@ describe("POST /e-auction/api/v1/users", () => {
       .expect(201);
   });
 });
+
+//add user
+describe("POST /e-auction/api/v1/users", () => {
+  it("should return 201 OK", () => {
+    return request(app)
+      .post("/e-auction/api/v1/users/add-user")
+      .send({
+        role: "buyer",
+        firstName: "testtest",
+        lastName: "testtest",
+        //random email address with 5 digits
+        email: "testtest" + Math.floor(Math.random() * 100000) + "@gmail.com",
+
+        pin: 1234,
+        address: "342 E. Foss",
+        phone: 1234567890,
+        city: "Flint",
+        state: "Michigan"
+      })
+      .expect(201);
+  });
+});
