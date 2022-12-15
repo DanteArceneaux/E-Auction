@@ -6,7 +6,8 @@ const { protect, authorize } = require("../middleware/auth.middleware");
 const {
   getUsers,
   addUser,
-  getUserById
+  getUserById,
+  deleteUserById
 } = require("../controllers/user.controller");
 
 const {
@@ -22,7 +23,9 @@ const {
   getBids,
   addBid,
   getBidByProductName,
-  getBidByEmail
+  getBidByEmail,
+  updateBidByEmail,
+  deleteBidByEmail
 } = require("../controllers/bids.controller.js");
 
 /* *** AUTHORIZE MUST GO AFTER PROTECT *** */
@@ -81,6 +84,12 @@ router.route("/bids/add-bid").post(protect, authorize("buyer"), addBid);
 //get bid by getBidByEmail
 router.route("/bids/email/:email").get(getBidByEmail);
 
+//delete bid by email
+router.route("/bids/delete/:email").delete(deleteBidByEmail);
+
+//update bid by email
+router.route("/bids/update/:email").put(updateBidByEmail);
+
 //get all users
 router.route("/users").get(getUsers);
 
@@ -89,6 +98,9 @@ router.route("/users/add-user").post(addUser);
 
 //get user by ID
 router.route("/users/:id").get(getUserById);
+
+//delete user by ID
+router.route("/users/delete/:id").delete(deleteUserById);
 
 //get bid by productName
 router.route("/bids/productName/:productName").get(getBidByProductName);

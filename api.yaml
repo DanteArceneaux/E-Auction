@@ -188,10 +188,200 @@ paths:
           description: "returns success."
           schema:
             type: "application/json"
+  # Add new product
 
+  /products/add-product: 
+    post:
+      summary: Posting a new product
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      description: "Posting a new product"
+      parameters:
+        - in: body
+          name: product
+          schema:
+            type: object
+            properties:
+              productName:
+                type: string
+              shortDescription:
+                type: string
+              detailedDescription:
+                type: string
+              startingPrice:
+                type: integer
+              bidEndDate:
+                type: string
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
 
+  # Add new bid 
+  /bids/add-bid: 
+    post:
+      summary: Posting a new bid
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      description: "Posting a new bid"
+      parameters:
+        - in: body
+          name: bid
+          schema:
+            type: object
+            properties:
+              buyer:
+                type: string
+              product:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              address:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              pin: 
+                type: integer
+              phone:
+                type: integer
+              email:
+                type: string
+              bidAmount:
+                type: integer
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
       
+      # update bids by email 
         
+  /bids/update/{email}:
+    put:
+      summary: "Update bid by email"
+      description: "Update bid by email"
+      parameters:
+        - name: "email"
+          in: "path"
+          description: "Email of user to return"
+          required: true
+          schema:
+            type: "application/json"
+            properties:
+              buyer:
+                type: string
+              product:
+                type: string
+              firstName:
+                type: string
+              lastName:
+                type: string
+              address:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              phone:
+                type: integer
+              email:
+                type: string
+              bidAmount:
+                type: integer
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
+  # update product by id
+  /products/update/{id}:
+    put:
+      summary: "Update product by id"
+      description: "Update product by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of product to return"
+          required: true
+          schema:
+            type: "application/json"
+            properties:
+              productName:
+                type: string
+              shortDescription:
+                type: string
+              detailedDescription:
+                type: string
+              startingPrice:
+                type: integer
+              bidEndDate:
+                type: string
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
+# Delete Product By Id
+  /products/delete/{id}:
+    delete:
+      summary: "Delete product by id"
+      description: "Delete product by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of product to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
+# Delete Bid By Email
+  /bids/delete/{email}:
+    delete:
+      summary: "Delete bid by email"
+      description: "Delete bid by email"
+      parameters:
+        - name: "email"
+          in: "path"
+          description: "Email of user to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
+# Delete User By Id
+  /users/delete/{id}:
+    delete:
+      summary: "Delete user by id"
+      description: "Delete user by id"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "ID of user to return"
+          required: true
+          type: "string"
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
 
      
 

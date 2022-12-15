@@ -66,7 +66,7 @@ const PORT = process.env.PORT || 5000; // 5000 is the default port
 if (process.env.NODE_ENV !== "test") {
   app.listen(PORT, () =>
     console.log(
-      `\n Server running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}`
+      `\n Server running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}/e-auction/api/v1/docs/`
         .brightBlue.bold
     )
   );

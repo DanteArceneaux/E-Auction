@@ -127,3 +127,40 @@ exports.getBidByEmail = asyncHandler(async (req, res) => {
     data: bids
   });
 });
+
+//@desc Update bid by email
+//@route PUT /api/v1/bids/email/{email}/
+exports.updateBidByEmail = asyncHandler(async (req, res) => {
+  const bid = await Bids.findOneAndUpdate(
+    { email: req.params.email },
+    req.body
+  );
+
+  if (!bid) {
+    return res.status(400).json({
+      success: false
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    data: bid
+  });
+});
+
+//@desc Delete bid by email
+//@route DELETE /api/v1/bids/email/{email}
+exports.deleteBidByEmail = asyncHandler(async (req, res) => {
+  const bid = await Bids.findOneAndDelete({ email: req.params.email });
+
+  if (!bid) {
+    return res.status(400).json({
+      success: false
+    });
+  }
+
+  res.status(200).json({
+    success: true,
+    data: {}
+  });
+});
