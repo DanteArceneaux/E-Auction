@@ -128,12 +128,16 @@ exports.getBidByEmail = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc Update bid by email
-//@route PUT /api/v1/bids/email/{email}/
-exports.updateBidByEmailAndProductId = asyncHandler(async (req, res) => {
-  const bid = await Bids.find(
-    { email: req.params.email },
-    { productId: req.params.productId }
+//@desc Update bidAmount for specific product and email
+//@route PUT /api/v1/bids/productName/{productName}/email/{email}
+exports.updateBidAmount = asyncHandler(async (req, res) => {
+  const bid = await Bids.findOneAndUpdate(
+    { productName: req.params.productName, email: req.params.email },
+    req.body,
+    {
+      new: true,
+      runValidators: true
+    }
   );
 
   if (!bid) {
@@ -144,7 +148,7 @@ exports.updateBidByEmailAndProductId = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    data: bid.bidAmount
+    data: bid
   });
 });
 

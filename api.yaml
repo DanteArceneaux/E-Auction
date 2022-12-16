@@ -285,24 +285,29 @@ paths:
           schema:
             type: "application/json"
       
-      # update bids by email 
+      # update bids by Product Name
         
-  /bids/update/{email}:
+  /bids/update/{productName}/{email}:
     put:
-      summary: "Update bid by email"
+      summary: "Update bid by product name"
       tags:
         - "bids"
       produces: 
         - application/json
       consumes: 
         - application/json
-      description: "Update bid by email"
+      description: "Update bid by productname"
       parameters:
+        # productName and email 
+        - name: "productName"
+          in: "path"
+         
         - name: "email"
           in: "path"
+        
         - name: "bid"
           in: "body"
-          description: "Email of user to return"
+          description: "Update bid amount "
           schema:
             type: "application/json"
             properties:

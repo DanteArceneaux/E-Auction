@@ -24,7 +24,7 @@ const {
   addBid,
   getBidByProductName,
   getBidByEmail,
-  updateBidByEmailAndProductId,
+  updateBidAmount,
   deleteBidByEmail
 } = require("../controllers/bids.controller.js");
 
@@ -87,10 +87,8 @@ router.route("/bids/email/:email").get(getBidByEmail);
 //delete bid by email
 router.route("/bids/delete/:email").delete(deleteBidByEmail);
 
-//update bid by email and productid
-router
-  .route("/bids/update/:email/:productId")
-  .put(updateBidByEmailAndProductId);
+//update bid by productName and email
+router.route("/bids/update/:productName/:email").put(updateBidAmount);
 
 //get all users
 router.route("/users").get(getUsers);
