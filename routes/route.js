@@ -3,12 +3,15 @@ const router = Routes.Router(); // Create a router
 
 const { protect, authorize } = require("../middleware/auth.middleware");
 
+// ***** USERS ROUTES *****
 const {
   getUsers,
   addUser,
   getUserById,
   deleteUserById
 } = require("../controllers/user.controller");
+
+// ***** PRODUCTS ROUTES *****
 
 const {
   updateProductById,
@@ -19,6 +22,8 @@ const {
   getProductByProductName
 } = require("../controllers/product.controller"); // Import the Product controller
 
+// ***** BIDS ROUTES *****
+
 const {
   getBids,
   addBid,
@@ -28,28 +33,7 @@ const {
   deleteBidByEmail
 } = require("../controllers/bids.controller.js");
 
-/* *** AUTHORIZE MUST GO AFTER PROTECT *** */
-
-/**
- * @swagger
- * /e-auction/api/v1/products:
- *  get:
- *   description: Use to request all products
- *  responses:
- *  '200':
- *   description: A successful response
- * content:
- * application/json:
- * schema:
- * type: array
- * items:
- * $ref: '#/components/schemas/Product'
- * components:
- * schemas:
- * Product:
- * type: object
- *
- */
+// **** PRODUCTS ROUTES ****
 
 //get all products
 router.route("/products").get(getProducts);
@@ -75,6 +59,8 @@ router
   .route("/products/update/:id")
   .put(protect, authorize("seller"), updateProductById);
 
+// **** BIDS ROUTES ****
+
 //get all bids
 router.route("/bids").get(getBids);
 
@@ -89,6 +75,8 @@ router.route("/bids/delete/:email").delete(deleteBidByEmail);
 
 //update bid by productName and email
 router.route("/bids/update/:productName/:email").put(updateBidAmount);
+
+// **** USERS ROUTES ****
 
 //get all users
 router.route("/users").get(getUsers);

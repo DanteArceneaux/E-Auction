@@ -34,6 +34,7 @@ if (process.env.NODE_ENV === "development") {
 // This is a middleware function that parses incoming requests with JSON payloads and is based on body-parser
 app.use(express.json());
 
+// Mount the swaggerUI middleware
 app.use(
   "/e-auction/api/v1/docs",
   swaggerUI.serve,
@@ -54,16 +55,19 @@ app.use(function(req, res, next) {
 });
 
 //Mount routers
-
 app.use("/e-auction/api/v1/", Router);
+
+// Mount the auth route
 app.use("/e-auction/api/v1/auth", auth);
 
 // Error Handler Middleware
 app.use(errorHandler);
 
+// Set the port
 const PORT = process.env.PORT || 5000; // 5000 is the default port
 
 if (process.env.NODE_ENV !== "test") {
+  // If the environment is not test
   app.listen(PORT, () =>
     console.log(
       `\n Server running in ${process.env.NODE_ENV} mode on http://localhost:${PORT}/e-auction/api/v1/docs/`

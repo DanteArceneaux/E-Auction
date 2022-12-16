@@ -408,7 +408,76 @@ paths:
           schema:
             type: "application/json"
 
-     
+  # Register User
+  /auth/register:
+    post:
+      summary: "Register a new user"
+      tags:
+        - "Register User"
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      description: "Register a new user. Constraints: Email must be unique. Phone must be 10 digts.  firstName must be 5 character.  Last name must be 3 characters. Role must be buyer or seller.  Pin may not be more than 6 digits.  Email must contain @ in email form."
+      parameters:
+        - in: body
+          name: auth
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string   
+              pin: 
+                type: integer
+              phone:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              role: 
+                type: string
+              
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
+  # Login User
+  /auth/login:
+    post:
+      summary: "Login a user"
+      tags:
+        - "Login User"
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      description: "Login a user."
+      parameters:
+        - in: body
+          name: auth
+          schema:
+            type: object
+            properties:
+              email:
+                type: string   
+              pin: 
+                type: integer
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
+              
+              
+              
 
    
 

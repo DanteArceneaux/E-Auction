@@ -4,7 +4,7 @@ const User = require("../models/User.model.js");
 const ErrorResponse = require("../utils/errorResponse.js");
 const Bid = require("../models/Bids.model.js");
 
-//@dec    Get all products
+// ***** @dec    Get all products *****
 //@route   GET /api/v1/sellers/products
 //use lookup to combine product with the bid information
 exports.getProducts = asyncHandler(async (req, res, next) => {
@@ -28,7 +28,7 @@ exports.getProducts = asyncHandler(async (req, res, next) => {
   });
 });
 
-//@desc    Get all products by category
+// ***** @desc    Get all products by category *****
 //@route   GET /api/v1/sellers/products/category/{category}
 exports.getProductsByCategory = asyncHandler(async (req, res) => {
   const products = await Product.find({ category: req.params.category });
@@ -39,7 +39,7 @@ exports.getProductsByCategory = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc Get product by productName
+// *****@desc Get product by productName *****
 //@route GET /api/v1/sellers/product/productName/{productName}
 
 exports.getProductByProductName = asyncHandler(async (req, res) => {
@@ -56,7 +56,7 @@ exports.getProductByProductName = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc    Get all products by seller
+// ***** @desc    Get all products by seller *****
 //@route   GET /api/v1/sellers/products/seller/{sellerId}
 exports.getProductsBySeller = asyncHandler(async (req, res) => {
   const products = await Product.find({ seller: req.params.sellerId });
@@ -67,7 +67,7 @@ exports.getProductsBySeller = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc    Get all products by seller and category
+//  ***** @desc    Get all products by seller and category  *****
 //@route   GET /api/v1/sellers/products/seller/{sellerId}/category/{category}
 exports.getProductsBySellerAndCategory = asyncHandler(async (req, res) => {
   const products = await Product.find({
@@ -81,7 +81,7 @@ exports.getProductsBySellerAndCategory = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc    Get product by bidEndDate
+// ***** @desc    Get product by bidEndDate  *****
 //@route   GET /api/v1/sellers/product/bidEndDate/{bidEndDate}
 exports.getProductByBidEndDate = asyncHandler(async (req, res) => {
   const products = await Product.find({ bidEndDate: req.params.bidEndDate });
@@ -92,7 +92,7 @@ exports.getProductByBidEndDate = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc    Add a new product
+// ***** @desc    Add a new product *****
 //@route   POST /api/v1/sellers/add-product
 exports.addProduct = asyncHandler(async (req, res, next) => {
   const {
@@ -133,7 +133,7 @@ exports.addProduct = asyncHandler(async (req, res, next) => {
   });
 });
 
-//@desc   Get product by id
+// ***** @desc   Get product by id *****
 //@route  GET /api/v1/sellers/product/{productId}
 exports.getProductById = async (req, res) => {
   try {
@@ -158,7 +158,7 @@ exports.getProductById = async (req, res) => {
   }
 };
 
-//@desc    Delete a product by id
+// ***** @desc    Delete a product by id *****
 //@route   GET /api/v1/sellers/delete/{productId}
 exports.deleteProductById = async (req, res) => {
   try {
@@ -195,7 +195,7 @@ exports.deleteProductById = async (req, res) => {
   }
 };
 
-//@desc    Update a product by id
+// ***** @desc    Update a product by id *****
 //@route   PUT /api/v1/sellers/update/{productId}
 exports.updateProductById = async (req, res) => {
   try {

@@ -2,7 +2,7 @@ const User = require("../models/User.model.js");
 const Bids = require("../models/Bids.model.js");
 const asyncHandler = require("../middleware/async.js");
 
-//@dec    Get all bids
+// ***** @dec    Get all bids *****
 //@route   GET /api/v1/bids
 exports.getBids = asyncHandler(async (req, res, next) => {
   let query;
@@ -81,7 +81,7 @@ exports.getBids = asyncHandler(async (req, res, next) => {
   });
 });
 
-//@dec    Create a new bid
+// ***** @dec    Create a new bid *****
 //@route   POST /api/v1/bids
 exports.addBid = asyncHandler(async (req, res, next) => {
   const bid = await Bids.create(req.body);
@@ -106,7 +106,7 @@ exports.addBid = asyncHandler(async (req, res, next) => {
   });
 });
 
-//@desc    Get bid by productName
+// ***** @desc    Get bid by productName *****
 //@route   GET /api/v1/bids/productName/{productName}
 exports.getBidByProductName = asyncHandler(async (req, res) => {
   const bids = await Bids.find({ productName: req.params.productName });
@@ -117,7 +117,7 @@ exports.getBidByProductName = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc    Get bid by specific email
+//***** @desc    Get bid by specific email *****
 //@route   GET /api/v1/bids/email/{email}
 exports.getBidByEmail = asyncHandler(async (req, res) => {
   const bids = await Bids.find({ email: req.params.email });
@@ -128,7 +128,7 @@ exports.getBidByEmail = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc Update bidAmount for specific product and email
+// ***** @desc Update bidAmount for specific product and email *****
 //@route PUT /api/v1/bids/productName/{productName}/email/{email}
 exports.updateBidAmount = asyncHandler(async (req, res) => {
   const bid = await Bids.findOneAndUpdate(
@@ -152,7 +152,7 @@ exports.updateBidAmount = asyncHandler(async (req, res) => {
   });
 });
 
-//@desc Delete bid by email
+// ***** @desc Delete bid by email *****
 //@route DELETE /api/v1/bids/email/{email}
 exports.deleteBidByEmail = asyncHandler(async (req, res) => {
   const bid = await Bids.findOneAndDelete({ email: req.params.email });

@@ -2,7 +2,7 @@ const asyncHandler = require("../middleware/async.js");
 const User = require("../models/User.model.js");
 const ErrorResponse = require("../utils/errorResponse.js");
 
-// @desc    Register user
+// ***** @desc    Register user *****
 // @route   POST /api/v1/auth/register
 
 exports.register = asyncHandler(async (req, res, next) => {
@@ -32,9 +32,7 @@ exports.register = asyncHandler(async (req, res, next) => {
   sendTokenResponse(user, 200, res);
 });
 
-// *****************************************************************************************
-
-// @desc    Login user
+//  ***** @desc    Login user *****
 // @route   POST /api/v1/auth/login
 exports.login = asyncHandler(async (req, res, next) => {
   const { email, pin } = req.body;
@@ -91,7 +89,7 @@ const sendTokenResponse = (user, statusCode, res) => {
     });
 };
 
-// desc Get current logged in user
+// ***** @desc Get current logged in user *****
 // @route GET /api/v1/auth/me
 // @access Private
 
