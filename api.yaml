@@ -339,7 +339,7 @@ paths:
       #send bearer token in header
       security:
         - bearerAuth: []
-        
+
 
   # Add new bid 
   /bids/add-bid: 
@@ -380,11 +380,20 @@ paths:
                 type: string
               bidAmount:
                 type: integer
+      #  authorization: bearerAuth in parameters
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+          description: "Bearer {token}"
       responses:
         200:
           description: "returns success."
           schema:
             type: "application/json"
+            #send bearer token in header
+      security:
+        - bearerAuth: []
       
       # update bids by Product Name
         
@@ -465,11 +474,20 @@ paths:
           description: "ID of product to return"
           required: true
           type: "string"
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+          description: "Bearer {token}"
       responses:
         200:
           description: "returns success."
           schema:
             type: "application/json"
+      #send bearer token in header
+      security:
+        - bearerAuth: []
+            
 
 # Delete Bid By Email
   /bids/delete/{email}:
@@ -484,11 +502,20 @@ paths:
           description: "Email of user to return"
           required: true
           type: "string"
+             #  authorization: bearerAuth in parameters
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+          description: "Bearer {token}"
       responses:
         200:
           description: "returns success."
           schema:
             type: "application/json"
+      #send bearer token in header
+      security:
+        - bearerAuth: []
 
 # Delete User By Id
   /users/delete/{id}:
