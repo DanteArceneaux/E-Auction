@@ -64,4 +64,20 @@ bidsSchema.pre("save", async function(done) {
   done();
 });
 
+//pre save hook constraint bidAmount to be greater than startingPrice
+bidsSchema.pre("save", async function(done) {
+  if (this.isNew) {
+    const product = await Product.findById(this.product).select(
+      "startingPrice"
+    );
+    if (this.bidAmount < product.startingPrice) {
+      throw new ErrorResponse(
+        `Bid amount must be greater than starting price`,
+        400
+      );
+    }
+  }
+  done();
+});
+
 module.exports = mongoose.model("Bids", bidsSchema);

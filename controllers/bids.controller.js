@@ -130,10 +130,10 @@ exports.getBidByEmail = asyncHandler(async (req, res) => {
 
 //@desc Update bid by email
 //@route PUT /api/v1/bids/email/{email}/
-exports.updateBidByEmail = asyncHandler(async (req, res) => {
-  const bid = await Bids.findOneAndUpdate(
+exports.updateBidByEmailAndProductId = asyncHandler(async (req, res) => {
+  const bid = await Bids.find(
     { email: req.params.email },
-    req.body
+    { productId: req.params.productId }
   );
 
   if (!bid) {
@@ -144,7 +144,7 @@ exports.updateBidByEmail = asyncHandler(async (req, res) => {
 
   res.status(200).json({
     success: true,
-    data: bid
+    data: bid.bidAmount
   });
 });
 

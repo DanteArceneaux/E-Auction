@@ -9,7 +9,7 @@ describe("GET /e-auction/api/v1/bids", () => {
   });
 });
 
-//add bid
+//add bid  Constraints: Must be a buyer, bid amount must be greater than starting price, bid end date must be in the future
 describe("POST /e-auction/api/v1/bids", () => {
   it("should return 201 OK", () => {
     return request(app)

@@ -22,6 +22,8 @@ paths:
   /products:
     get:
       summary: "Get all products"
+      tags:
+        - "products"
       description: "Returns all products from the system that the user has access to"
       responses:
         200:
@@ -45,6 +47,8 @@ paths:
   /users:
     get:
       summary: "Get all users"
+      tags:
+        - "users"
       description: "Returns all users"
       responses:
         200:
@@ -67,6 +71,8 @@ paths:
   /bids:
     get:
       summary: "Get all bids"
+      tags:
+        - "bids"
       description: "Returns all bids"
       responses:
         200:
@@ -91,6 +97,8 @@ paths:
   /users/{id}:
     get:
       summary: "Get user by id"
+      tags:
+        - "users"
       description: "Returns user by id"
       parameters:
         - name: "id"
@@ -108,6 +116,8 @@ paths:
   /products/{id}:
     get:
       summary: "Get product by id"
+      tags:
+        - "products"
       description: "Returns product by id"
       parameters:
         - name: "id"
@@ -120,15 +130,17 @@ paths:
           description: "returns success."
           schema:
             type: "application/json"
-  #  get bid by product name
-  /bids/productName/{productName}:
+  #  get product by product name
+  /products/productName/{productName}:
     get:
-      summary: "Get bid by product name"
-      description: "Returns bid by product name"
+      summary: "Get product by product name"
+      tags:
+        - "products"
+      description: "Returns product by product name"
       parameters:
-        - name: "name"
+        - name: "productName"
           in: "path"
-          description: "Name of product to return"
+          description: "Product name of product to return"
           required: true
           type: "string"
       responses:
@@ -136,10 +148,13 @@ paths:
           description: "returns success."
           schema:
             type: "application/json"
+
   # get bids by email 
   /bids/email/{email}:
     get:
       summary: "Get bid by email"
+      tags:
+        - "bids"
       description: "Returns bid by email"
       parameters:
         - name: "email"
@@ -157,11 +172,13 @@ paths:
   /users/add-user: 
     post:
       summary: Posting a new user
+      tags:
+        - "users"
       produces: 
         - application/json
       consumes: 
         - application/json
-      description: "Posting a new user. Role MUST be buyer or seller"
+      description: "Posting a new user. Role MUST be buyer or seller. \nValidations: Product Name is not null, min 5 and max 30 characters. \nfirstName is not null, min 5 and max 30 characters. \n lastName is not null, min 3 and max 25 characters. \n email is not null, and it should be valid email pattern, containing a single @. \n mobile is not null, min 10 and max 10 character and all must be numeric."
       parameters:
         - in: body
           name: user
@@ -192,12 +209,15 @@ paths:
 
   /products/add-product: 
     post:
-      summary: Posting a new product
+      summary: Add a new product.  Constraints: Must be a seller, product name must be unique, bid end date must be in the future
+      tags:
+        - "products"
       produces: 
         - application/json
       consumes: 
         - application/json
-      description: "Posting a new product"
+      description: "Constraints: Product Category should be the one from the existing. (Predefined Hard Coded 'Painting Sculptor Ornament'). \n Starting price should be number Bid end date should be future date, else throw a custom exception in such case. \n  Constraints: Must be a seller, product name must be unique, bid end date must be in the future\n\nValidations: Product Name is not null, min 5 and max 30 characters. \nfirstName is not null, min 5 and max 30 characters. \n lastName is not null, min 3 and max 25 characters. \n email is not null, and it should be valid email pattern, containing a single @. \n mobile is not null, min 10 and max 10 character and all must be numeric."
+
       parameters:
         - in: body
           name: product
@@ -223,12 +243,14 @@ paths:
   # Add new bid 
   /bids/add-bid: 
     post:
-      summary: Posting a new bid
+      summary: Add a new bid.  Constraints: Must be a buyer, bid amount must be greater than starting price, bid end date must be in the future
+      tags:
+        - "bids"
       produces: 
         - application/json
       consumes: 
         - application/json
-      description: "Posting a new bid"
+      description: "Posting a new bid. \n Constraints: Must be a buyer, bid amount must be greater than starting price, bid end date must be in the future\n\nValidations: Product Name is not null, min 5 and max 30 characters. \nfirstName is not null, min 5 and max 30 characters. \n lastName is not null, min 3 and max 25 characters. \n email is not null, and it should be valid email pattern, containing a single @. \n mobile is not null, min 10 and max 10 character and all must be numeric."
       parameters:
         - in: body
           name: bid
@@ -268,33 +290,23 @@ paths:
   /bids/update/{email}:
     put:
       summary: "Update bid by email"
+      tags:
+        - "bids"
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
       description: "Update bid by email"
       parameters:
         - name: "email"
           in: "path"
+        - name: "bid"
+          in: "body"
           description: "Email of user to return"
-          required: true
           schema:
             type: "application/json"
             properties:
-              buyer:
-                type: string
-              product:
-                type: string
-              firstName:
-                type: string
-              lastName:
-                type: string
-              address:
-                type: string
-              city:
-                type: string
-              state:
-                type: string
-              phone:
-                type: integer
-              email:
-                type: string
+              
               bidAmount:
                 type: integer
       responses:
@@ -307,6 +319,8 @@ paths:
   /products/update/{id}:
     put:
       summary: "Update product by id"
+      tags:
+        - "products"
       description: "Update product by id"
       parameters:
         - name: "id"
@@ -335,8 +349,10 @@ paths:
 # Delete Product By Id
   /products/delete/{id}:
     delete:
-      summary: "Delete product by id"
-      description: "Delete product by id"
+      summary: Delete product by id. Constraints: Must be a seller
+      tags:
+        - "products"
+      description: "Only sellers can delete products. If the product is past the bid end date, it will throw an exception. If the product has bids, it will throw an exception and cannot be deleted."
       parameters:
         - name: "id"
           in: "path"
@@ -353,7 +369,9 @@ paths:
   /bids/delete/{email}:
     delete:
       summary: "Delete bid by email"
-      description: "Delete bid by email"
+      tags:
+        - "bids"
+      description: "Delete bid by email. Constraints: Must be a buyer"
       parameters:
         - name: "email"
           in: "path"
@@ -370,6 +388,8 @@ paths:
   /users/delete/{id}:
     delete:
       summary: "Delete user by id"
+      tags:
+        - "users"
       description: "Delete user by id"
       parameters:
         - name: "id"
