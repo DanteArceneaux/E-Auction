@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1671158977326" clover="3.2.0">
-  <project timestamp="1671158977326" name="All files">
-    <metrics statements="298" coveredstatements="192" conditionals="62" coveredconditionals="18" methods="46" coveredmethods="21" elements="406" coveredelements="231" complexity="0" loc="298" ncloc="298" packages="7" files="15" classes="15"/>
+<coverage generated="1671167414611" clover="3.2.0">
+  <project timestamp="1671167414611" name="All files">
+    <metrics statements="304" coveredstatements="193" conditionals="66" coveredconditionals="18" methods="47" coveredmethods="21" elements="417" coveredelements="232" complexity="0" loc="304" ncloc="304" packages="7" files="15" classes="15"/>
     <package name="E-Auction">
       <metrics statements="34" coveredstatements="31" conditionals="6" coveredconditionals="3" methods="2" coveredmethods="1"/>
       <file name="server.js" path="C:\Users\dante\OneDrive\Desktop\E-Auction\server.js">
@@ -131,14 +131,14 @@
         <line num="124" count="0" type="stmt"/>
         <line num="133" count="4" type="stmt"/>
         <line num="134" count="0" type="stmt"/>
-        <line num="139" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="140" count="0" type="stmt"/>
-        <line num="145" count="0" type="stmt"/>
-        <line num="153" count="4" type="stmt"/>
-        <line num="154" count="0" type="stmt"/>
-        <line num="156" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="157" count="0" type="stmt"/>
-        <line num="162" count="0" type="stmt"/>
+        <line num="143" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="144" count="0" type="stmt"/>
+        <line num="149" count="0" type="stmt"/>
+        <line num="157" count="4" type="stmt"/>
+        <line num="158" count="0" type="stmt"/>
+        <line num="160" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="161" count="0" type="stmt"/>
+        <line num="166" count="0" type="stmt"/>
       </file>
       <file name="product.controller.js" path="C:\Users\dante\OneDrive\Desktop\E-Auction\controllers\product.controller.js">
         <metrics statements="58" coveredstatements="21" conditionals="10" coveredconditionals="1" methods="10" coveredmethods="2"/>
@@ -263,9 +263,9 @@
       </file>
     </package>
     <package name="E-Auction.models">
-      <metrics statements="43" coveredstatements="27" conditionals="6" coveredconditionals="0" methods="10" coveredmethods="4"/>
+      <metrics statements="49" coveredstatements="28" conditionals="10" coveredconditionals="0" methods="11" coveredmethods="4"/>
       <file name="Bids.model.js" path="C:\Users\dante\OneDrive\Desktop\E-Auction\models\Bids.model.js">
-        <metrics statements="11" coveredstatements="6" conditionals="4" coveredconditionals="0" methods="1" coveredmethods="0"/>
+        <metrics statements="17" coveredstatements="7" conditionals="8" coveredconditionals="0" methods="2" coveredmethods="0"/>
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
         <line num="3" count="4" type="stmt"/>
@@ -276,7 +276,13 @@
         <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
         <line num="58" count="0" type="stmt"/>
         <line num="64" count="0" type="stmt"/>
-        <line num="67" count="4" type="stmt"/>
+        <line num="68" count="4" type="stmt"/>
+        <line num="69" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="70" count="0" type="stmt"/>
+        <line num="73" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="74" count="0" type="stmt"/>
+        <line num="80" count="0" type="stmt"/>
+        <line num="83" count="4" type="stmt"/>
       </file>
       <file name="Product.model.js" path="C:\Users\dante\OneDrive\Desktop\E-Auction\models\Product.model.js">
         <metrics statements="11" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="0"/>
