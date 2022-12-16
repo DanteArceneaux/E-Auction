@@ -296,7 +296,7 @@ paths:
         - application/json
       consumes: 
         - application/json
-      description: "Update bid by productname"
+      description: "Update bid by productname.  As a buyer, can update bid amount on products"
       parameters:
         # productName and email 
         - name: "productName"
