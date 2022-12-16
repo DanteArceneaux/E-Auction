@@ -18,7 +18,93 @@ consumes:
   - "application/json"
 produces:
   - "application/json"
+
+components:
+  securitySchemes:
+    bearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
+
+#security
+security:
+  - bearerAuth: []
+
+
 paths:
+# Register User
+  /auth/register:
+    post:
+      summary: "Register a new user"
+      tags:
+        - "Register User"
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      description: "Register a new user. Constraints: Email must be unique. Phone must be 10 digts.  firstName must be 5 character.  Last name must be 3 characters. Role must be buyer or seller.  Pin may not be more than 6 digits.  Email must contain @ in email form."
+      parameters:
+        - in: body
+          name: auth
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+              lastName:
+                type: string
+              email:
+                type: string   
+              pin: 
+                type: integer
+              phone:
+                type: string
+              city:
+                type: string
+              state:
+                type: string
+              role: 
+                type: string
+              
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+  securityDefinitions:
+  bearerAuth:
+    type: apiKey
+    scheme: bearer
+    bearerFormat: JWT
+
+  # Login User
+  /auth/login:
+    post:
+      summary: "Login a user"
+      tags:
+        - "Login User"
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      description: "Login a user."
+      parameters:
+        - in: body
+          name: auth
+          schema:
+            type: object
+            properties:
+              email:
+                type: string   
+              pin: 
+                type: integer
+      responses:
+        200:
+          description: "returns success."
+          schema:
+            type: "application/json"
+
+              
   /products:
     get:
       summary: "Get all products"
@@ -209,6 +295,8 @@ paths:
 
   /products/add-product: 
     post:
+      security:
+        - bearerAuth: []
       summary: Add a new product.  Constraints: Must be a seller, product name must be unique, bid end date must be in the future
       tags:
         - "products"
@@ -219,6 +307,7 @@ paths:
       description: "Constraints: Product Category should be the one from the existing. (Predefined Hard Coded 'Painting Sculptor Ornament'). \n Starting price should be number Bid end date should be future date, else throw a custom exception in such case. \n  Constraints: Must be a seller, product name must be unique, bid end date must be in the future\n\nValidations: Product Name is not null, min 5 and max 30 characters. \nfirstName is not null, min 5 and max 30 characters. \n lastName is not null, min 3 and max 25 characters. \n email is not null, and it should be valid email pattern, containing a single @. \n mobile is not null, min 10 and max 10 character and all must be numeric."
 
       parameters:
+      #  in body product
         - in: body
           name: product
           schema:
@@ -226,19 +315,31 @@ paths:
             properties:
               productName:
                 type: string
-              shortDescription:
-                type: string
-              detailedDescription:
+              productCategory:
                 type: string
               startingPrice:
                 type: integer
               bidEndDate:
                 type: string
+              shortDescription:
+                type: string
+              detailedDescription:
+                type: string
+           #  authorization: bearerAuth in parameters
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+          description: "Bearer {token}"
       responses:
         200:
           description: "returns success."
           schema:
             type: "application/json"
+      #send bearer token in header
+      security:
+        - bearerAuth: []
+        
 
   # Add new bid 
   /bids/add-bid: 
@@ -373,7 +474,7 @@ paths:
 # Delete Bid By Email
   /bids/delete/{email}:
     delete:
-      summary: "Delete bid by email"
+      summary: "Delete bid by email.  Constraints: Must be a buyer"
       tags:
         - "bids"
       description: "Delete bid by email. Constraints: Must be a buyer"
@@ -408,76 +509,4 @@ paths:
           schema:
             type: "application/json"
 
-  # Register User
-  /auth/register:
-    post:
-      summary: "Register a new user"
-      tags:
-        - "Register User"
-      produces: 
-        - application/json
-      consumes: 
-        - application/json
-      description: "Register a new user. Constraints: Email must be unique. Phone must be 10 digts.  firstName must be 5 character.  Last name must be 3 characters. Role must be buyer or seller.  Pin may not be more than 6 digits.  Email must contain @ in email form."
-      parameters:
-        - in: body
-          name: auth
-          schema:
-            type: object
-            properties:
-              firstName:
-                type: string
-              lastName:
-                type: string
-              email:
-                type: string   
-              pin: 
-                type: integer
-              phone:
-                type: string
-              city:
-                type: string
-              state:
-                type: string
-              role: 
-                type: string
-              
-      responses:
-        200:
-          description: "returns success."
-          schema:
-            type: "application/json"
-
-  # Login User
-  /auth/login:
-    post:
-      summary: "Login a user"
-      tags:
-        - "Login User"
-      produces: 
-        - application/json
-      consumes: 
-        - application/json
-      description: "Login a user."
-      parameters:
-        - in: body
-          name: auth
-          schema:
-            type: object
-            properties:
-              email:
-                type: string   
-              pin: 
-                type: integer
-      responses:
-        200:
-          description: "returns success."
-          schema:
-            type: "application/json"
-
-              
-              
-              
-
-   
-
+  
