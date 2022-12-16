@@ -438,28 +438,38 @@ paths:
         - "products"
       description: "Update product by id"
       parameters:
-        - name: "id"
-          in: "path"
+        - in: path
+          name: id
           description: "ID of product to return"
           required: true
+        - in: header
+          name: Authorization
+          type: string
+          required: true
+          description: "Bearer {token}"
+        - in: body
+          name: product
           schema:
-            type: "application/json"
-            properties:
-              productName:
-                type: string
-              shortDescription:
-                type: string
-              detailedDescription:
-                type: string
-              startingPrice:
-                type: integer
-              bidEndDate:
-                type: string
-      responses:
-        200:
-          description: "returns success."
-          schema:
-            type: "application/json"
+          type: "application/json"
+          properties:
+          productName:
+           type: string
+          shortDescription:
+            type: string
+          detailedDescription:
+            type: string
+          startingPrice:
+             type: integer
+          bidEndDate:
+             type: string
+          responses:
+            200:
+              description: "returns success."
+              schema:
+                type: "application/json"
+          #send bearer token in header
+          security:
+            - bearerAuth: []
 
 # Delete Product By Id
   /products/delete/{id}:

@@ -80,4 +80,50 @@ bidsSchema.pre("save", async function(done) {
   done();
 });
 
+//pre save hook firstName must be 5 characters or more
+bidsSchema.pre("save", async function(done) {
+  if (this.isNew) {
+    if (this.firstName.length < 5) {
+      throw new ErrorResponse(`First name must be at least 5 characters`, 400);
+    }
+  }
+  done();
+});
+
+//pre save hook lastName must be 3 characters or more
+bidsSchema.pre("save", async function(done) {
+  if (this.isNew) {
+    if (this.lastName.length < 3) {
+      throw new ErrorResponse(`Last name must be at least 3 characters`, 400);
+    }
+  }
+  done();
+});
+
+//pre save hook email is not null and should be an email pattern with @
+bidsSchema.pre("save", async function(done) {
+  if (this.isNew) {
+    if (this.email === null) {
+      throw new ErrorResponse(`Email is required`, 400);
+    }
+    if (!this.email.includes("@")) {
+      throw new ErrorResponse(`Email must be a valid email address`, 400);
+    }
+  }
+  done();
+});
+
+//pre save hook phone is not null and should be 10 digits
+bidsSchema.pre("save", async function(done) {
+  if (this.isNew) {
+    if (this.phone === null) {
+      throw new ErrorResponse(`Phone is required`, 400);
+    }
+    if (this.phone.toString().length !== 10) {
+      throw new ErrorResponse(`Phone must be 10 digits`, 400);
+    }
+  }
+  done();
+});
+
 module.exports = mongoose.model("Bids", bidsSchema);

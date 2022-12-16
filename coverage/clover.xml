@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1671167414611" clover="3.2.0">
-  <project timestamp="1671167414611" name="All files">
+<coverage generated="1671190897153" clover="3.2.0">
+  <project timestamp="1671190897153" name="All files">
     <metrics statements="304" coveredstatements="193" conditionals="66" coveredconditionals="18" methods="47" coveredmethods="21" elements="417" coveredelements="232" complexity="0" loc="304" ncloc="304" packages="7" files="15" classes="15"/>
     <package name="E-Auction">
       <metrics statements="34" coveredstatements="31" conditionals="6" coveredconditionals="3" methods="2" coveredmethods="1"/>
@@ -25,21 +25,21 @@
         <line num="30" count="4" type="cond" truecount="1" falsecount="1"/>
         <line num="31" count="0" type="stmt"/>
         <line num="35" count="4" type="stmt"/>
-        <line num="37" count="4" type="stmt"/>
-        <line num="44" count="4" type="stmt"/>
-        <line num="45" count="11" type="stmt"/>
-        <line num="49" count="11" type="stmt"/>
+        <line num="38" count="4" type="stmt"/>
+        <line num="45" count="4" type="stmt"/>
+        <line num="46" count="11" type="stmt"/>
         <line num="50" count="11" type="stmt"/>
         <line num="51" count="11" type="stmt"/>
-        <line num="53" count="11" type="stmt"/>
+        <line num="52" count="11" type="stmt"/>
+        <line num="54" count="11" type="stmt"/>
         <line num="58" count="4" type="stmt"/>
-        <line num="59" count="4" type="stmt"/>
-        <line num="62" count="4" type="stmt"/>
-        <line num="64" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="66" count="4" type="cond" truecount="1" falsecount="1"/>
-        <line num="67" count="0" type="stmt"/>
-        <line num="68" count="0" type="stmt"/>
-        <line num="76" count="4" type="stmt"/>
+        <line num="61" count="4" type="stmt"/>
+        <line num="64" count="4" type="stmt"/>
+        <line num="67" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="69" count="4" type="cond" truecount="1" falsecount="1"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="72" count="0" type="stmt"/>
+        <line num="80" count="4" type="stmt"/>
       </file>
     </package>
     <package name="E-Auction.config">
@@ -68,27 +68,27 @@
         <line num="18" count="1" type="stmt"/>
         <line num="21" count="1" type="stmt"/>
         <line num="32" count="1" type="stmt"/>
-        <line num="39" count="4" type="stmt"/>
-        <line num="40" count="0" type="stmt"/>
-        <line num="43" count="0" type="cond" truecount="0" falsecount="4"/>
-        <line num="44" count="0" type="stmt"/>
-        <line num="48" count="0" type="stmt"/>
-        <line num="52" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="53" count="0" type="stmt"/>
-        <line num="57" count="0" type="stmt"/>
-        <line num="59" count="0" type="cond" truecount="0" falsecount="2"/>
-        <line num="60" count="0" type="stmt"/>
-        <line num="63" count="0" type="stmt"/>
-        <line num="67" count="4" type="stmt"/>
+        <line num="37" count="4" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="41" count="0" type="cond" truecount="0" falsecount="4"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="46" count="0" type="stmt"/>
+        <line num="50" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="51" count="0" type="stmt"/>
+        <line num="55" count="0" type="stmt"/>
+        <line num="57" count="0" type="cond" truecount="0" falsecount="2"/>
+        <line num="58" count="0" type="stmt"/>
+        <line num="61" count="0" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
         <line num="69" count="1" type="stmt"/>
-        <line num="71" count="1" type="stmt"/>
-        <line num="78" count="1" type="cond" truecount="1" falsecount="1"/>
-        <line num="79" count="0" type="stmt"/>
+        <line num="76" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="77" count="0" type="stmt"/>
+        <line num="80" count="1" type="stmt"/>
         <line num="82" count="1" type="stmt"/>
-        <line num="84" count="1" type="stmt"/>
-        <line num="98" count="4" type="stmt"/>
+        <line num="96" count="4" type="stmt"/>
+        <line num="97" count="0" type="stmt"/>
         <line num="99" count="0" type="stmt"/>
-        <line num="101" count="0" type="stmt"/>
       </file>
       <file name="bids.controller.js" path="C:\Users\dante\OneDrive\Desktop\E-Auction\controllers\bids.controller.js">
         <metrics statements="47" coveredstatements="28" conditionals="14" coveredconditionals="7" methods="8" coveredmethods="2"/>
@@ -341,26 +341,26 @@
         <line num="1" count="4" type="stmt"/>
         <line num="2" count="4" type="stmt"/>
         <line num="4" count="4" type="stmt"/>
-        <line num="11" count="4" type="stmt"/>
-        <line num="20" count="4" type="stmt"/>
-        <line num="29" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="23" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="39" count="4" type="stmt"/>
+        <line num="42" count="4" type="stmt"/>
+        <line num="47" count="4" type="stmt"/>
+        <line num="52" count="4" type="stmt"/>
         <line num="55" count="4" type="stmt"/>
         <line num="58" count="4" type="stmt"/>
-        <line num="63" count="4" type="stmt"/>
+        <line num="65" count="4" type="stmt"/>
         <line num="68" count="4" type="stmt"/>
         <line num="71" count="4" type="stmt"/>
         <line num="74" count="4" type="stmt"/>
-        <line num="79" count="4" type="stmt"/>
+        <line num="77" count="4" type="stmt"/>
         <line num="82" count="4" type="stmt"/>
         <line num="85" count="4" type="stmt"/>
         <line num="88" count="4" type="stmt"/>
         <line num="91" count="4" type="stmt"/>
         <line num="94" count="4" type="stmt"/>
-        <line num="97" count="4" type="stmt"/>
-        <line num="100" count="4" type="stmt"/>
-        <line num="103" count="4" type="stmt"/>
-        <line num="106" count="4" type="stmt"/>
-        <line num="108" count="4" type="stmt"/>
+        <line num="96" count="4" type="stmt"/>
       </file>
     </package>
     <package name="E-Auction.utils">

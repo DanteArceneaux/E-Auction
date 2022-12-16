@@ -100,6 +100,8 @@ exports.addBid = asyncHandler(async (req, res, next) => {
     email
   } = req.body;
 
+  
+
   res.status(201).json({
     success: true,
     data: bid
