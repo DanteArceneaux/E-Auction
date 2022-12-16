@@ -406,7 +406,7 @@ paths:
         - application/json
       consumes: 
         - application/json
-      description: "Update bid by productname.  As a buyer, can update bid amount on products"
+      description: "Update bid by id."
       parameters:
         # productName and email 
         - name: "productName"
@@ -422,54 +422,103 @@ paths:
             type: "application/json"
             properties:
               
-              bidAmount:
-                type: integer
+            bidAmount:
+              type: integer
       responses:
         200:
           description: "returns success."
           schema:
             type: "application/json"
+     
 
   # update product by id
   /products/update/{id}:
     put:
-      summary: "Update product by id"
+      summary: "Update bid by product name"
       tags:
         - "products"
-      description: "Update product by id"
+      produces: 
+        - application/json
+      consumes: 
+        - application/json
+      description: "Update bid by product name.  As a buyer, can update bid amount on products"
       parameters:
-        - in: path
-          name: id
-          description: "ID of product to return"
-          required: true
+        # productName and email 
+        - name: "id"
+          in: "path"
+
+        - name: "bid"
+          in: "body"
+          description: "Update product by id "
+          schema:
+            type: application/json
+            properties:
+            productName:
+            type: string
+            shortDescription:
+              type: string
+            detailedDescription:
+              type: string
+            startingPrice:
+              type: integer
+            bidEndDate:
+              type: string
+                
+         
         - in: header
           name: Authorization
           type: string
           required: true
           description: "Bearer {token}"
-        - in: body
-          name: product
+
+      responses:
+        200:
+          description: "returns success."
           schema:
-          type: "application/json"
-          properties:
-          productName:
-           type: string
-          shortDescription:
-            type: string
-          detailedDescription:
-            type: string
-          startingPrice:
-             type: integer
-          bidEndDate:
-             type: string
-          responses:
-            200:
-              description: "returns success."
-              schema:
-                type: "application/json"
-          #send bearer token in header
-          security:
-            - bearerAuth: []
+            type: "application/json"
+        
+       
+      
+
+
+    # put:
+    #   summary: "Update product by id"
+    #   tags:
+    #     - "products"
+    #   description: "Update product by id"
+    #   parameters:
+    #     - in: path
+    #       name: id
+    #       description: "ID of product to return"
+    #       required: true
+    #     - in: header
+    #       name: Authorization
+    #       type: string
+    #       required: true
+    #       description: "Bearer {token}"
+    #     - in: body
+    #       name: product
+    #       schema:
+    #       type: "application/json"
+    #       properties:
+    #       productName:
+    #        type: string
+    #       shortDescription:
+    #         type: string
+    #       detailedDescription:
+    #         type: string
+    #       startingPrice:
+    #          type: integer
+    #       bidEndDate:
+    #          type: string
+    #       responses:
+    #         200:
+    #           description: "returns success."
+    #           schema:
+    #             type: "application/json"
+    #       #send bearer token in header
+    #       security:
+    #         - bearerAuth: []
 
 # Delete Product By Id
   /products/delete/{id}:
